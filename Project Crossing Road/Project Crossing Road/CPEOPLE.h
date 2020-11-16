@@ -1,6 +1,8 @@
 #ifndef _cpeople_h_
 #define _cpeople_h_
 
+#include"CVEHICLE.h"
+#include"CANIMAL.h"
 #include <iostream>
 
 using namespace std;
