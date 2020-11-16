@@ -36,3 +36,10 @@
 x64
 *.vcxproj*
 Debug
+Project Crossing Road/Project Crossing Road/Project Crossing Road.vcxproj.user
+Project Crossing Road/Project Crossing Road/Project Crossing Road.vcxproj
+Project Crossing Road/Project Crossing Road/Project Crossing Road.vcxproj
+Project Crossing Road/Project Crossing Road/Project Crossing Road.vcxproj.filters
+*.user
+*.filters
+*.vcxproj
