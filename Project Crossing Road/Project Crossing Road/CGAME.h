@@ -1,9 +1,13 @@
 #ifndef _cgame_h_
 #define _cgame_h_
 
-#include "CVEHICLE.h"
-#include "CANIMAL.h"
+//#include "CVEHICLE.h"
+//#include "CANIMAL.h"
 #include "CPEOPLE.h"
+#include "CDINAUSOR.h"
+#include "CBIRD.h"
+#include "CCAR.h"
+#include "CTRUCK.h"
 #include <iostream>
 
 using namespace std;

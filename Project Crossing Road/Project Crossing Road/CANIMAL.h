@@ -12,14 +12,4 @@ public:
 	virtual void Tell();
 };
 
-class CDINAUSOR : public CANIMAL {
-public:
-	//...
-};
-
-class CBIRD : public CANIMAL {
-public:
-	//...
-};
-
 #endif

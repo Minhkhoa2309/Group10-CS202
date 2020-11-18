@@ -12,14 +12,4 @@ public:
 	//...
 };
 
-class CTRUCK : public CVEHICLE {
-public:
-	//...
-};
-
-class CCAR : public CVEHICLE {
-public:
-	//...
-};
-
 #endif
