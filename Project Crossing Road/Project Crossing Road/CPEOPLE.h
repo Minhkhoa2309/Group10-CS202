@@ -13,12 +13,15 @@ private:
 	bool mState;
 public:
 	CPEOPLE();
+	CPEOPLE(int, int);
+	CPEOPLE(const CPEOPLE&);
+	CPEOPLE& operator=(const CPEOPLE&);
 	void Up(int);
 	void Left(int);
 	void Right(int);
 	void Down(int);
-	bool isImpact(const CVEHICLE*&);
-	bool isImpact(const CANIMAL*&);
+	bool isImpact(const CVEHICLE*);
+	bool isImpact(const CANIMAL*);
 	bool isFinish();
 	bool isDead();
 };
