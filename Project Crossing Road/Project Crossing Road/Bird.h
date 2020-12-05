@@ -5,7 +5,7 @@
 
 
 class Bird : public Obstacle {
-	char** a; //a[3][6]
+	char** a; // a[2][3]
 public:
 	Bird();
 	Bird(Position pos);
@@ -16,7 +16,7 @@ public:
 	void sound();
 	void test();
 	int getWidth() {
-		return 6;
+		return 3;
 	}
 	int getType();
 };

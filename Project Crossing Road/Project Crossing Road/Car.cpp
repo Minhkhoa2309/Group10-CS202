@@ -1,74 +1,27 @@
 #include"Car.h"
 using namespace std;
 
+
 Car::Car(Position pos) : Obstacle(pos) {
-	a = new char*[3];
-	for (int i = 0; i < 3; i++)
-	{
-		a[i] = new char[8];
-	}
-	//Row1
-	for (int i = 0; i < 8; i++) {
-		if (i == 0 || i == 6 || i == 7 || i == 8)
-			a[0][i] = ' ';
-		else
-			a[0][i] = '_';
-	}
-	//Row2
-	a[1][0] = '/';
-	for (int i = 1; i < 8; i++) {
-		if (i>0 && i<5)	a[1][i] = ' ';
-		if (i == 5)	a[1][5] = char(220);
-		if (i == 6)	a[1][6] = '\\';
-		else a[1][i] = ' ';
-	}
-	//Row3
-	for (int i = 0; i < 7; i++) {
-		if (i == 0)a[2][i] = (char)240;
-		else
-			if (i == 1 || i == 5)a[2][i] = 'O';
-			else
-				//cout << (char)196;
-				a[2][i] = '-';
-	}
-	a[2][7] = (char)217;
+	a = new char*[1];
+	a[0] = new char[4];
+	a[0][0] = 220;
+	a[0][1] = 219;
+	a[0][2] = 219;
+	a[0][3] = 220;
 };
 Car::Car()
 {
-	a = new char*[3];
-	for (int i = 0; i < 3; i++)
-	{
-		a[i] = new char[8];
-	}
-	//Row1
-	for (int i = 0; i < 8; i++) {
-		if (i == 0 || i == 6 || i == 7 || i == 8)
-			a[0][i] = ' ';
-		else
-			a[0][i] = '_';
-	}
-	//Row2
-	a[1][0] = '/';
-	for (int i = 1; i < 8; i++) {
-		if (i>0 && i<5)	a[1][i] = ' ';
-		if (i == 5)	a[1][5] = char(220);
-		if (i == 6)	a[1][6] = '\\';
-		else a[1][i] = ' ';
-	}
-	//Row3
-	for (int i = 0; i < 7; i++) {
-		if (i == 0)a[2][i] = (char)240;
-		else
-			if (i == 1 || i == 5)a[2][i] = 'O';
-			else
-				//cout << (char)196;
-				a[2][i] = '-';
-	}
-	a[2][7] = (char)217;
+	a = new char* [1];
+	a[0] = new char[4];
+	a[0][0] = 220;
+	a[0][1] = 219;
+	a[0][2] = 219;
+	a[0][3] = 220;
 }
 Car::~Car()
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 1; i++)
 		delete[] a[i];
 	delete[] a;
 }

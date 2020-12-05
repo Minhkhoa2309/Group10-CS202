@@ -5,7 +5,7 @@
 
 
 class Car : public Obstacle {
-	char** a; //a[3][8]
+	char** a; //a[1][4]
 public:
 	Car();
 	Car(Position pos);
@@ -16,7 +16,7 @@ public:
 	void sound();
 	void test();
 	int getWidth() {
-		return 8;
+		return 4;
 	}
 	int getType();
 };
