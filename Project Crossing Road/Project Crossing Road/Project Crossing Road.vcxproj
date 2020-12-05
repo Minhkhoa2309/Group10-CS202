@@ -18,6 +18,38 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Bird.h" />
+    <ClInclude Include="Car.h" />
+    <ClInclude Include="ConsoleWindow.h" />
+    <ClInclude Include="Dinosaur.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Lanes.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="OneLane.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Position.h" />
+    <ClInclude Include="Truck.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Bird.cpp" />
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="ConsoleWindow.cpp" />
+    <ClCompile Include="Dinosaur.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Lanes.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="OneLane.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Position.cpp" />
+    <ClCompile Include="Truck.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,29 +170,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="CANIMAL.cpp" />
-    <ClCompile Include="CBIRD.cpp" />
-    <ClCompile Include="CCAR.cpp" />
-    <ClCompile Include="CDINAUSOR.cpp" />
-    <ClCompile Include="CGAME.cpp" />
-    <ClCompile Include="ConsoleWindow.cpp" />
-    <ClCompile Include="CPEOPLE.cpp" />
-    <ClCompile Include="CTRUCK.cpp" />
-    <ClCompile Include="CVEHICLE.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CANIMAL.h" />
-    <ClInclude Include="CBIRD.h" />
-    <ClInclude Include="CCAR.h" />
-    <ClInclude Include="CDINAUSOR.h" />
-    <ClInclude Include="CGAME.h" />
-    <ClInclude Include="ConsoleWindow.h" />
-    <ClInclude Include="CPEOPLE.h" />
-    <ClInclude Include="CTRUCK.h" />
-    <ClInclude Include="CVEHICLE.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
