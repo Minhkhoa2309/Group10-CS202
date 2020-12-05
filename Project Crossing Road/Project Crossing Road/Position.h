@@ -10,12 +10,10 @@ public:
 		X = x;
 		Y = y;
 	}
-	int getX()
-	{
+	int getX() {
 		return X;
 	}
-	int getY()
-	{
+	int getY() {
 		return Y;
 	}
 	void setPos(int x, int y) {

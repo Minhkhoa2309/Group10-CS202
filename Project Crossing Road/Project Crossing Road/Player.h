@@ -13,18 +13,16 @@
 #include "Truck.h"
 #include <cmath>
 
-
 class Player {
 private:
 	Position pos;
-	bool isDead;
 	char** a;  //a[3][5]
 	char** emptyPlayer;
 	int width = 5, height = 3;
+	bool isDead;
 public:
 	Player(); // set default position
 	Player(Position pos); // set current position when load game
-
 	~Player();
 
 	Position getPos();
@@ -35,15 +33,16 @@ public:
 
 	char** shape();
 	char** emptyShape();
-	bool checkIsDead();
+	bool IsDead();
 	bool crash(Position pos, int w, int h);
 
 	void Up();
 	void Down();
-	void Right();
 	void Left();
-	void killPlayer(); // set isDead
+	void Right();
+	void gotHit(); // set isDead
 	void sound();
+	void drawPlayer();
 
 };
 #endif // Player
