@@ -3,6 +3,8 @@
 #include "Obstacle.h"
 #include "Bird.h"
 #include "Dinosaur.h"
+#include "Player.h"
+#include "Position.h"
 using namespace std;
 
 
@@ -12,5 +14,8 @@ int main()
 	a.test();
 	Dinosaur b;
 	b.test();
+
+
+	
 	return 0;
 }

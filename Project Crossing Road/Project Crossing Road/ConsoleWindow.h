@@ -70,11 +70,11 @@ void FixConsoleWindow();
 void DisableMouse();
 
 
-class constantVar {
-public:
-	static bool isMute;
-	static bool isHard;
-};
+//class constantVar {
+//public:
+//	static bool isMute;
+//	static bool isHard;
+//};
 
 void drawTitle();
 
