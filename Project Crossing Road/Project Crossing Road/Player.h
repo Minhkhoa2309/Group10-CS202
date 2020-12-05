@@ -11,7 +11,6 @@
 #include "Car.h"
 #include "Dinosaur.h"
 #include "Truck.h"
-
 #include <cmath>
 
 
