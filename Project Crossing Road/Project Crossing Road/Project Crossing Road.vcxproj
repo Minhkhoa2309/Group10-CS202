@@ -47,7 +47,6 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="OneLane.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Position.cpp" />
     <ClCompile Include="Truck.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
