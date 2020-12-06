@@ -19,7 +19,7 @@ char **Truck::shape()
 };
 void Truck::sound()
 {
-	PlaySound(TEXT("carstarthonkbackfire.wav"), NULL, SND_ASYNC);
+	PlaySound(TEXT("Truck.wav"), NULL, SND_SYNC);
 }
 Truck::Truck()
 {

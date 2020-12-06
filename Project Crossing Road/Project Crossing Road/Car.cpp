@@ -32,7 +32,7 @@ char **Car::shape()
 }
 void Car::sound()
 {
-	PlaySound(TEXT("trafficjam.wav"), NULL, SND_ASYNC);
+	PlaySound(TEXT("Car.wav"), NULL, SND_SYNC);
 }
 int Car::getType()
 {

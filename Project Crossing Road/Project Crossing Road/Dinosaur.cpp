@@ -48,4 +48,4 @@ void Dinosaur::test() {
 
 char** Dinosaur::shape() { return a; };
 int Dinosaur::getType() { return 2; }
-void Dinosaur::sound() { PlaySound(TEXT("./Tiger6.wav"), NULL, SND_ASYNC); };
+void Dinosaur::sound() { PlaySound(TEXT("Dinosaur.wav"), NULL, SND_SYNC); };

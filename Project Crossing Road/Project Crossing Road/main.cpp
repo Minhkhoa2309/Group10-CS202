@@ -12,9 +12,20 @@ int main()
 {
 	Bird a;
 	a.test();
+	a.sound();
+
 	Dinosaur b;
 	b.test();
+	b.sound();
 
+	Car c;
+	//c.test();
+	c.sound();
+
+	Truck d;
+	//d.test();
+	d.sound();
+	
 
 	
 	return 0;

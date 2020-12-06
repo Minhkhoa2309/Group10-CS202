@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <Windows.h>
-#include <mmsystem.h>
 #include "ConsoleWindow.h"
 #include "Position.h"
 using namespace std;

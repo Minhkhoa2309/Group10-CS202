@@ -48,4 +48,4 @@ void Bird::test() {
 
 char** Bird::shape() { return a; };
 int Bird::getType() { return 0; }
-void Bird::sound() { PlaySound(TEXT("boc4.wav"), NULL, SND_ASYNC); };
+void Bird::sound() { PlaySound(TEXT("Bird.wav"), NULL, SND_SYNC); };
