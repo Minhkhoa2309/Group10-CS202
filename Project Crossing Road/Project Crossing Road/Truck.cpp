@@ -11,7 +11,13 @@ Truck::Truck(Position pos) : Obstacle(pos) {
 	a[0][3] = 219;
 };
 
-
+void Truck::test() {
+	for (int i = 0; i < 1; i++)
+		for (int j = 0; j < 4; j++) {
+			cout << a[i][j];
+		}
+	cout << endl;
+}
 char **Truck::shape()
 {
 

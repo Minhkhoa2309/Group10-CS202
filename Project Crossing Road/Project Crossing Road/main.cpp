@@ -19,11 +19,11 @@ int main()
 	b.sound();
 
 	Car c;
-	//c.test();
+	c.test();
 	c.sound();
 
 	Truck d;
-	//d.test();
+	d.test();
 	d.sound();
 	
 
