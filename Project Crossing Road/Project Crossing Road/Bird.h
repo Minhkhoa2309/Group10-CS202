@@ -14,11 +14,11 @@ public:
 
 	char** shape();
 	void sound();
-	void test();
-	int getWidth() {
-		return 3;
-	}
+
+	int getWidth();
 	int getType();
+
+	void test();
 };
 
 

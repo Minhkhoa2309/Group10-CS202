@@ -15,9 +15,7 @@ public:
 	char** shape();
 	void sound();
 	void test();
-	int getWidth() {
-		return 4;
-	}
+	int getWidth();
 	int getType();
 };
 

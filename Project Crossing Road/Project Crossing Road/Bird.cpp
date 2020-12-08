@@ -7,12 +7,12 @@ Bird::Bird() {
 	a[0] = new char[3];
 	a[1] = new char[3];
 	
-	a[0][0] = 220;
-	a[0][1] = 32;
-	a[0][2] = 220;
-	a[1][0] = 32;
-	a[1][1] = 223;
-	a[1][2] = 32;
+	a[0][0] = (char)220;
+	a[0][1] = (char)32;
+	a[0][2] = (char)220;
+	a[1][0] = (char)32;
+	a[1][1] = (char)223;
+	a[1][2] = (char)32;
 }
 
 Bird::Bird(Position pos) : Obstacle(pos) {
@@ -20,13 +20,13 @@ Bird::Bird(Position pos) : Obstacle(pos) {
 	a[0] = new char[3];
 	a[1] = new char[3];
 
-	a[0][0] = 220;
-	a[0][1] = 32;
-	a[0][2] = 220;
-	a[1][0] = 32;
-	a[1][1] = 223;
-	a[1][2] = 32;
-};
+	a[0][0] = (char)220;
+	a[0][1] = (char)32;
+	a[0][2] = (char)220;
+	a[1][0] = (char)32;
+	a[1][1] = (char)223;
+	a[1][2] = (char)32;
+}
 
 
 Bird::~Bird() {
@@ -36,6 +36,13 @@ Bird::~Bird() {
 }
 
 
+char** Bird::shape() { return a; };
+void Bird::sound() { PlaySound(TEXT("Bird.wav"), NULL, SND_SYNC); };
+
+int Bird::getWidth() { return 3; }
+int Bird::getType() { return 0; }
+
+
 void Bird::test() {
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -43,9 +50,4 @@ void Bird::test() {
 		}
 		cout << endl;
 	}
-};
-
-
-char** Bird::shape() { return a; };
-int Bird::getType() { return 0; }
-void Bird::sound() { PlaySound(TEXT("Bird.wav"), NULL, SND_SYNC); };
+}

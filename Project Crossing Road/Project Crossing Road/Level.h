@@ -1,8 +1,7 @@
-#ifndef cLevel_h
-#define cLevel_h
+#ifndef Level_h
+#define Level_h
 
 #include <algorithm>
-
 #include "Position.h"
 #include "Obstacle.h"	
 #include "Bird.h"
@@ -10,18 +9,17 @@
 #include "Dinosaur.h"
 #include "Truck.h"
 
+
 class Level {
 private:
 	int level;
-	int maxEnemy, minSpeed, maxSpeed, nEnemy;
+	int maxObstacle, minSpeed, maxSpeed, nObstacle;
 	int nLane;
 	const int maxLevel = 5;
 	void initialize();
 public:
 	Level();
 	Level(int level, int nEnemy);
-
-	//  ~cLevel();
 	
 	int getLevel();
 	bool newLevel(int lv);
@@ -30,7 +28,7 @@ public:
 	int getMinSpeed();
 	Obstacle* randNewObstacle(Position pos);
 	Obstacle* getNewObstacle(Position pos, int type);
-	void decNEnemy(int d);
+	void decNObstacle(int d);
 };
 
 #endif // cLevel

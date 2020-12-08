@@ -1,11 +1,14 @@
 #ifndef _console_header
 #define _console_header
+
 #include <iostream>
-#include <Windows.h>
+#include <stdio.h>
 #include <conio.h>
 #include <time.h>
+#include <windows.h>
+using namespace std;
 
-//static bool isMute = false;
+#define default_ColorCode		7
 
 #define ColorCode_Back			0
 #define ColorCode_DarkBlue		1
@@ -24,57 +27,45 @@
 #define ColorCode_Yellow		14
 #define ColorCode_White			15
 
-#define default_ColorCode		7
-
-
 #define key_Up		1072
 #define key_Down	1080
 #define key_Left	1075
 #define key_Right	1077
 #define key_none	-1
 
-#include <iostream>
-#include <Windows.h>
 
-	// ==================== Long ==================== //
-void resizeConsole(int width, int height);  // Long 
-void FixConsoleWindow(); // Long
+class constantVar {
+public:
+	static bool isMute;
+	static bool isHard;
+};
+
+
+	// ==================== Old ==================== //
+void resizeConsole(int width, int height);  // Long
 void SetColor(int backgound_color, int text_color); // Long
 void SetScreenBufferSize(SHORT width, SHORT height); // Long
 void ShowScrollbar(BOOL Show); // Long
 void DisableCtrButton(bool Close, bool Min, bool Max); // Long
 
 	// ==================== New ==================== //
-
-// -------------------------------------------------------- //
 int inputKey();
 
-// -------------------------Screen------------------------- //
+// = Screen = //
 void clrscr();
 
-//screen: goto [x,y]
-void gotoXY(int column, int line);
+void gotoXY(int column, int row);
 
-//screen: get [x]
 int whereX();
-
-//screen: get [y]
 int whereY();
 
 void TextColor(int color);
 
-// end----------------------Screen----------------------end //
-
+// = Console Ctrl = //
 void ShowConsoleCursor(bool showFlag);
 void FixConsoleWindow();
 void DisableMouse();
 
-
-//class constantVar {
-//public:
-//	static bool isMute;
-//	static bool isHard;
-//};
 
 void drawTitle();
 

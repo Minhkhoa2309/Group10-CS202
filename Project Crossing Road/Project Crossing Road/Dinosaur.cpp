@@ -7,12 +7,12 @@ Dinosaur::Dinosaur() {
 	for (int i = 0; i < 2; i++) {
 		a[i] = new char[3];
 	}
-	a[0][0] = 32;
-	a[0][1] = 32;
-	a[0][2] = 220;
-	a[1][0] = 220;
-	a[1][1] = 219;
-	a[1][2] = 223;
+	a[0][0] = (char)32;
+	a[0][1] = (char)32;
+	a[0][2] = (char)220;
+	a[1][0] = (char)220;
+	a[1][1] = (char)219;
+	a[1][2] = (char)223;
 }
 
 Dinosaur::Dinosaur(Position pos) : Obstacle(pos) {
@@ -20,12 +20,12 @@ Dinosaur::Dinosaur(Position pos) : Obstacle(pos) {
 	for (int i = 0; i < 2; i++) {
 		a[i] = new char[3];
 	}
-	a[0][0] = 32;
-	a[0][1] = 32;
-	a[0][2] = 220;
-	a[1][0] = 220;
-	a[1][1] = 219;
-	a[1][2] = 223;
+	a[0][0] = (char)32;
+	a[0][1] = (char)32;
+	a[0][2] = (char)220;
+	a[1][0] = (char)220;
+	a[1][1] = (char)219;
+	a[1][2] = (char)223;
 };
 
 
@@ -36,6 +36,13 @@ Dinosaur::~Dinosaur() {
 }
 
 
+char** Dinosaur::shape() { return a; };
+void Dinosaur::sound() { PlaySound(TEXT("Dinosaur.wav"), NULL, SND_SYNC); };
+
+int Dinosaur::getWidth() { return 3; }
+int Dinosaur::getType() { return 2; }
+
+
 void Dinosaur::test() {
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -44,8 +51,3 @@ void Dinosaur::test() {
 		cout << endl;
 	}
 };
-
-
-char** Dinosaur::shape() { return a; };
-int Dinosaur::getType() { return 2; }
-void Dinosaur::sound() { PlaySound(TEXT("Dinosaur.wav"), NULL, SND_SYNC); };

@@ -2,7 +2,7 @@
 #define Truck_h
 
 #include "Obstacle.h"
-
+using namespace std;
 
 class Truck : public Obstacle {
 	char** a; //a[1][4]
@@ -15,9 +15,7 @@ public:
 	char** shape();
 	void sound();
 	void test();
-	int getWidth() {
-		return 8;
-	}
+	int getWidth();
 	int getType();
 };
 
