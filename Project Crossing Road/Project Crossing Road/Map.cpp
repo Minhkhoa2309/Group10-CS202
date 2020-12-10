@@ -267,11 +267,3 @@ void Map::updatePosPlayer(char moving) {}
 void Map::bombEffect() {}
 void Map::saveGame(string file) {}
 bool Map::loadGame(string file) { return false; }
-void Map::printBorder() {}
-void Map::printCongrats() {}
-bool Map::printLevelUp() { return false; }
-bool Map::isEnd() { return true; }
-bool Map::isWin() { return false; }
-void Map::nextLevel() {}
-void Map::printInt(int x, ofstream& outline) {}
-int Map::readInt(ifstream& infile) { return -1; }
