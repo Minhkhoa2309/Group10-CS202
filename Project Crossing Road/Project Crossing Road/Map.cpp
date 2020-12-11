@@ -24,21 +24,16 @@ void Map::printCongrats() {
 	gotoXY(23, 20); cout << "##           ##     ##    ###     ##      ########      ##     ##	 	    " << endl;
 	gotoXY(23, 21); cout << "##           ##     ##    ###     ##      #######       ##     ##     ##  ##" << endl;
 	gotoXY(50, 23); cout << "YOU HAVE WON THE GAME!" << endl;
-	gotoXY(40, 25); cout << "Exit ?	" << endl;
-	const char* choice[2] = { "<YES>", "<OF COURSE>" };
-	int pos = 0, x = 36, y = 26;
-	TextColor(7);
-	/*TextColor(227);
-	gotoXY(x, y);
-	cout << choice[0];
-	TextColor(7);
-
-	TextColor(227);
-	gotoXY(x+10, y);
-	cout << choice[1];
-	TextColor(7);*/
-
-	while (1) {
+	//gotoXY(40, 25); cout << "Exit ?	" << endl;
+	const char* back = "<BACK TO MENU>";
+	while (inputKey() != 13) {
+		TextColor(7);
+		TextColor(227);
+		gotoXY(40, 23);
+		cout << back;
+		TextColor(7);
+	}
+	/*while (1) {
 		TextColor(7);
 		for (int i = 0; i < 2; i++) {
 			if (i == pos) {
@@ -66,7 +61,7 @@ void Map::printCongrats() {
 		case 13:
 			return;
 		}
-	}
+	}*/
 }
 
 Map::Map() : width(115), height(36) {
