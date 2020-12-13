@@ -24,21 +24,16 @@ void Map::printCongrats() {
 	gotoXY(23, 20); cout << "##           ##     ##    ###     ##      ########      ##     ##	 	    " << endl;
 	gotoXY(23, 21); cout << "##           ##     ##    ###     ##      #######       ##     ##     ##  ##" << endl;
 	gotoXY(50, 23); cout << "YOU HAVE WON THE GAME!" << endl;
-	gotoXY(40, 25); cout << "Exit ?	" << endl;
-	const char* choice[2] = { "<YES>", "<OF COURSE>" };
-	int pos = 0, x = 36, y = 26;
-	TextColor(7);
-	/*TextColor(227);
-	gotoXY(x, y);
-	cout << choice[0];
-	TextColor(7);
-
-	TextColor(227);
-	gotoXY(x+10, y);
-	cout << choice[1];
-	TextColor(7);*/
-
-	while (1) {
+	//gotoXY(40, 25); cout << "Exit ?	" << endl;
+	const char* back = "<BACK TO MENU>";
+	while (inputKey() != 13) {
+		TextColor(7);
+		TextColor(227);
+		gotoXY(40, 23);
+		cout << back;
+		TextColor(7);
+	}
+	/*while (1) {
 		TextColor(7);
 		for (int i = 0; i < 2; i++) {
 			if (i == pos) {
@@ -66,7 +61,7 @@ void Map::printCongrats() {
 		case 13:
 			return;
 		}
-	}
+	}*/
 }
 
 Map::Map() : width(115), height(36) {
@@ -259,11 +254,149 @@ void Map::deleteOldPlayer() {
 }
 
 // ========== Temp ========== //
-void Map::drawPlayer() {}
-void Map::drawEnemies(Obstacle* obstacle) {}
-void Map::randomNextState() {}
-void Map::initializeNewState() {}
-void Map::updatePosPlayer(char moving) {}
-void Map::bombEffect() {}
-void Map::saveGame(string file) {}
-bool Map::loadGame(string file) { return false; }
+void Map::drawPlayer() {
+	int status = draw(player.getPos(), player.shape(), player.getWidth(), player.getHeight());
+	/*if (status == -1) {
+		player.killPlayer(); // cho nay nhin co ve la k dung 
+	}*/
+}
+void Map::drawEnemies(Obstacle* obstacle) {
+	int status = draw(obstacle->getPos(), obstacle->shape(), obstacle->getWidth(), obstacle->getHeight());
+	if (status == 0) {
+		obstacle->goOutMap();
+	}
+	/*if (status == -1) {
+		player.killPlayer(); // cho nay nhin co ve la k dung 
+	}*/
+}
+void Map::randomNextState() {
+	srand(time(NULL));
+	//int t = rand(); // this will be get from global clock
+	Obstacle* newEnemy;
+	Position pos;
+	int tryCount = 10000;
+	while (tryCount--) {
+		int rRow = (rand() % 9) + 1;
+		pos = Position((rRow * 3) + 1, 4);
+		newEnemy = level.randNewObstacle(pos);
+		if (!newEnemy) break;
+		if (!rowsData.pushEnemy(rRow, newEnemy)) {
+			level.decNObstacle(1);
+			delete newEnemy;
+		};
+	}
+	++t;
+	int tmp = rowsData.moveToNextState(t);
+	level.decNObstacle(tmp);
+	drawMap();
+}
+void Map::initializeNewState() {
+	player.~Player();
+	new(&player) Player();
+	rowsData.~Lanes();
+	new(&rowsData) Lanes();
+	int padding[10];
+	for (int i = 0; i < 10; ++i) {
+		padding[i] = 0;
+		int speed = rand() % (level.getMinSpeed() - level.getMaxSpeed() + 1) + level.getMaxSpeed();
+		bool direction = rand() % 2;
+		bool redLight = rand() % 2;
+		rowsData.pushRow(new OneLane(speed, direction, redLight, (i * 3) + 1));
+	}
+	Obstacle* newEnemy;
+	Position pos;
+	int tryCount = 10000;
+	while (tryCount--) {
+		int rRow = (rand() % 9) + 1;
+		padding[rRow] += (rand() % 20) + 9;
+		pos = Position((rRow * 3) + 1, padding[rRow]);
+		newEnemy = level.randNewObstacle(pos);
+		if (!newEnemy) break;
+		if (!rowsData.pushEnemy(rRow, newEnemy)) {
+			level.decNObstacle(1);
+			delete newEnemy;
+		};
+	}
+	Sleep(200);
+	rowsData.moveToNextState(0);
+}
+void Map::updatePosPlayer(char moving) {
+	deleteOldPlayer();
+	if (moving == 'a' || moving == 'A') player.Left();
+	else if (moving == 'w' || moving == 'W') player.Up();
+	else if (moving == 'd' || moving == 'D') player.Right();
+	else if (moving == 's' || moving == 'S') player.Down();
+	else return;
+}
+void Map::bombEffect() {
+	cout << "man hinh luc bi thua " << endl;
+}
+void Map::saveGame(string file) {
+	ofstream outfile("./data/" + file + ".bin", ios::out | ios::binary);
+	printInt(level.getLevel(), outfile);
+	printInt(player.getX(), outfile);
+	printInt(player.getY(), outfile);
+
+	vector <OneLane*> rows(rowsData.listLane());
+	for (int i = 0; i < 10; ++i) {
+		printInt(rows[i]->getCurrentRow(), outfile);
+		printInt((int)rows[i]->getDirection(), outfile);
+		printInt(rows[i]->getSpeed(), outfile);
+		printInt((int)rows[i]->getRedLight(), outfile);
+
+		vector <Obstacle*> enemy(rows[i]->getObstacle());
+		printInt((int)enemy.size(), outfile);
+
+		for (int j = 0; j < (int)enemy.size(); ++j) {
+			printInt(enemy[j]->getX(), outfile);
+			printInt(enemy[j]->getY(), outfile);
+			printInt(enemy[j]->getType(), outfile);
+		}
+	}
+	outfile.close();
+}
+bool Map::loadGame(string file) { 
+	ifstream infile("./data/" + file, ios::in | ios::binary);
+	if (!infile.is_open()) {
+		return false;
+	}
+	int lv = readInt(infile);
+	level.~Level();
+	new(&level) Level(lv, 0);
+	int playerX, playerY;
+	playerX = readInt(infile);
+	playerY = readInt(infile);
+	player.~Player();
+	new(&player) Player(Position(playerX, playerY));
+
+	int nEnemy = 0;
+
+	rowsData.~Lanes();
+	new(&rowsData) Lanes();
+
+	for (int i = 0; i < 10; ++i) {
+		int currentRow, direction, speed, redLight;
+		currentRow = readInt(infile);
+		direction = readInt(infile);
+		speed = readInt(infile);
+		redLight = readInt(infile);
+
+		rowsData.pushRow(new OneLane(speed, direction, redLight, currentRow));
+
+		int enemySize = readInt(infile);
+		nEnemy += enemySize;
+
+		for (int j = 0; j < enemySize; ++j) {
+			int eX, eY, eType;
+			eX = readInt(infile);
+			eY = readInt(infile);
+			eType = readInt(infile);
+			rowsData.pushEnemy(i, level.getNewObstacle(Position(eX, eY), eType));
+			//Print enemy ?
+		}
+	}
+	infile.close();
+	return true;
+}
+
+
