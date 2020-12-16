@@ -1,16 +1,17 @@
-# Group10-CS202-19APCS1
+***#Group10-CS202-19APCS1***
 
-Võ Khương Duy
-19125087
+#Võ Khương Duy
+#19125087
 
-Nguyễn Hoàng Hiếu
-19125091
+#Nguyễn Hoàng Hiếu
+#19125091
 
-Tạ Ngọc Minh Khoa
-19125100
+#Tạ Ngọc Minh Khoa
+#19125100
 
-Phạm Thiên Long
-19125104
+#Phạm Thiên Long
+#19125104
+
 
 
 + cPosition, cPlayer, cLevel, cConsole, 
@@ -29,6 +30,9 @@ Phạm Thiên Long
 + Position là tọa độ trên console
 
 
+
 Hiếu: newGame(), continueGame(), loading(), toggleMute(), toggleHard()
+
 Long: getAllFilename(), loadGameMenu(), saveGameMenu(), gameOver()
+
 Duy: gameSetting(), menu(), continueMenu(), togglePauseGame()
