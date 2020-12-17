@@ -14,7 +14,17 @@ int OneLane::getCurrentRow() { return currentRow; }
 bool OneLane::getDirection() { return direction; }
 bool OneLane::getRedLight() { return redLight; }
 
-bool OneLane::pushObstacle(Obstacle* newObstacle) { return false; }
+bool OneLane::pushObstacle(Obstacle* newObstacle) {
+	if (!direction) {
+		newObstacle->updatePosition(0, RIGHTMAP - newObstacle->getY());
+	}
+	if (newObstacle->getY() > RIGHTMAP || newObstacle->getY() <= 3 || (enemy.size() && abs(enemy.back()->getY() - newObstacle->getY()) <= 8)) {
+		return false;
+	}
+	enemy.push_back(newObstacle);
+	printNewObstacle(newObstacle->getPos(), newObstacle->shape(), newObstacle->getWidth(), newObstacle->getHeight());
+	return true;
+}
 int OneLane::moveToNextState(int t) { 
 	int nDelete = 0;
 	if ((redLight && (rand() % 8 == 0)) || (!redLight && (rand() % 15 == 0)) || (t == 0)) {
@@ -60,29 +70,6 @@ int OneLane::moveToNextState(int t) {
 	}
 	enemy = newObstacle;
 	return nDelete;
-}
-void OneLane::redrawState() {
-	if (redLight) {
-		TextColor(12);
-	}
-	else {
-		TextColor(10);
-	}
-	if (direction)
-	{
-		gotoXY(RIGHTMAP + 60, currentRow);
-	}
-	else
-	{
-		gotoXY(LEFTMAP - 1, currentRow);
-	}
-	cout << (char)254;
-	TextColor(7);
-	for (int i = 0; i < (int)enemy.size(); ++i) {
-		Obstacle* curEnemy = enemy[i];
-		printNewObstacle(curEnemy->getPos(), curEnemy->shape(), curEnemy->getWidth(), curEnemy->getHeight());
-	}
-   
 }
 void OneLane::toggleRedLight() {
 	redLight = !redLight;

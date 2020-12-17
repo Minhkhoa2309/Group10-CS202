@@ -31,7 +31,6 @@ public:
 	
 	bool pushObstacle(Obstacle* newObstacle); // push a new new enemy, if !position => set base on direction
 	int moveToNextState(int t); // if % speed = 0, move all enemy left or right base on direction && redLight
-	void redrawState();
 	void toggleRedLight();
 	void deleteOldObstacle(Position pos, int w, int h);
 	bool printNewObstacle(Position pos, char** shape, int w, int h);
