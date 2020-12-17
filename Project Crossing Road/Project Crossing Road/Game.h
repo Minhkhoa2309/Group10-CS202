@@ -35,6 +35,8 @@ public:
 
 	bool loadGameMenu(); // get file of cMap map
 
+	bool operatingGame();
+
 	void saveGameMenu(); //void saveGame(); // print file of cMap map
 
 	void pauseMenu(int cmd);

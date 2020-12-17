@@ -166,3 +166,170 @@
 //		//arrCar[i].Move();
 //	}
 //}
+
+void Game::loading() {
+	//if (!constantVar::isMute)PlaySound(TEXT("RaceStart.wav"), NULL, SND_ASYNC);
+	map.printMap();
+	map.deleteOldPlayer();
+	drawTitle();
+	gotoXY(30, 25);
+	cout << "[";
+	for (int i = 0; i <= 50; i++) {
+		Sleep(35);
+		gotoXY(30 + i, 25);
+		cout << "=>";
+		gotoXY(55, 26);
+		cout << i * 2 << "%";
+	}
+}
+
+void Game::toggleMute() {
+	constantVar::isMute = !constantVar::isMute;
+}
+
+void Game::toggleHard() {
+	constantVar::isHard = !constantVar::isHard;
+}
+
+bool Game::newGame() { 
+	if (!isLoaded) {
+		map.~Map();
+		new(&map) Map();
+	}
+	isPausing = false;
+	map.printMap();
+	if (!isLoaded)
+		map.initializeNewState();
+	isLoaded = false;
+	return operatingGame();
+}
+
+bool Game::operatingGame(){
+	char key;
+	const string choice[3] = { "Save Game","Load Game","Quit" };
+	int pos = 0;
+	while (!map.isEnd()) {
+		if (!isPausing) 
+			map.randomNextState();
+		int x = 125, y = 22;
+		if (isPausing) {
+			TextColor(15);
+			gotoXY(125, 19); 
+			cout << "PAUSE MENU" << endl;
+			for (int i = 0; i < 3; i++) {
+				gotoXY(x, y + i);
+				if (i == pos)
+					TextColor(11);
+				else
+					TextColor(15);
+				cout << choice[i] << endl;
+			}
+		}
+		if (_kbhit()) {
+			key = _getch();
+			if (key == 'l')
+				saveGameMenu();
+			if (key == 't') {
+				togglePauseGame();
+				loadGameMenu();
+				loading();
+				clrscr();
+				map.redrawMap();
+				togglePauseGame();
+				isLoaded = false;
+			}
+			if (key == 'p') {
+				togglePauseGame();
+				pos = 0; // reset pause menu selection
+				if (!isPausing) { // map.redrawMap();
+					gotoXY(125, 19); 
+					cout << "                  " << endl;
+					for (int i = 0; i < 3; i++) {
+						gotoXY(x, y + i);
+						cout << "                 " << endl;
+					}
+				}
+			}
+			if (key == 'a')
+				if (!isPausing) 
+					map.updatePosPlayer('a');
+			if (key == 'w') {
+				if (!isPausing) map.updatePosPlayer('w');
+				else {
+					pos--;
+					pos = (pos + 3) % 3;
+				}
+			}
+			if (key == 's') {
+				if (!isPausing) map.updatePosPlayer('s');
+				else {
+					pos++;
+					pos %= 3;
+				}
+			}
+			if (key == 'd') {
+				if (!isPausing)
+				map.updatePosPlayer('d');
+			}
+			if (isPausing && key == 13) {
+				switch (pos) {
+				case 0:
+					saveGameMenu();
+					break;
+				case 1:
+					loadGameMenu();
+					loading();
+					clrscr();
+					map.redrawMap();
+					togglePauseGame();
+					isLoaded = false;
+					break;
+				case 2:
+					TextColor(15);					
+					return true;
+				}
+			}
+			TextColor(15);
+			map.drawPlayer();
+			map.drawMap();
+		}
+		if (map.isWin()) {
+			//if (!constantVar::isMute)PlaySound(TEXT("CompleteStage.wav"), NULL, SND_ASYNC);
+			if (map.printLevelUp()) {
+				clrscr();
+				map.nextLevel();
+				map.printMap();
+				map.deleteOldPlayer();
+				map.initializeNewState();
+				map.drawPlayer();
+			}
+			else 
+				return true;
+		}
+	}
+	return false;
+}
+
+bool Game::continueGame() {
+	isPausing = false;
+	map.printMap();
+	map.initializeNewState();
+	return operatingGame();
+}
+
+void Game::gameSettings(){}
+void Game::menu(bool& isFinish) {}
+bool Game::loadGameMenu() {
+	return false;
+} // get file of cMap map
+void Game::saveGameMenu() {} //void saveGame(); // print file of cMap map
+void Game::pauseMenu(int cmd) {}
+void Game::togglePauseGame() {}// toggle status of isPausing
+void Game::gameOver() {}
+void Game::playGame(bool& is_finish) {}
+void Game::testThread() {}
+void Game::menu() {}
+vector<string> getAllFilename(const std::string& name) {
+	vector<string> x = {};
+	return x;
+}
