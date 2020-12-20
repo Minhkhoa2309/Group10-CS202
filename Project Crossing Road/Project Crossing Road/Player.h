@@ -18,7 +18,7 @@ private:
 	Position pos;
 	char** a;  //a[3][5]
 	char** emptyPlayer;
-	int width = 5, height = 3;
+	int width = 3, height = 2;
 	bool isDead;
 public:
 	Player(); // set default position
