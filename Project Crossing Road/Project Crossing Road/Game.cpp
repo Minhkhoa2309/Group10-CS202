@@ -1,168 +1,277 @@
 #include "Game.h"
 
 
-//CGAME::CGAME() {}
+void Game::gameSettings() {
+	system("cls");
 
-//CGAME::CGAME(int level) {}
+	const char* setting[3] = { "Difficulty", "Sound", "Back to Main Menu" };
+	const char* current[2] = { "", "" };
 
-//CGAME::CGAME(const CGAME& b) {
-//	Player = b.Player;
-//
-//	numOfTrucks = b.numOfTrucks;
-//	numOfCars = b.numOfCars;
-//	numOfDinos = b.numOfDinos;
-//	numOfBirds = b.numOfBirds;
-//	
-//	int i;
-//
-//	arrTruck = new CTRUCK[numOfTrucks];
-//	for (i = 0; i < numOfTrucks; ++i) { arrTruck[i] = b.arrTruck[i]; }
-//
-//	arrCar = new CCAR[numOfCars];
-//	for (i = 0; i < numOfCars; ++i) { arrCar[i] = b.arrCar[i]; }
-//
-//	arrDino = new CDINAUSOR[numOfDinos];
-//	for (i = 0; i < numOfDinos; ++i) { arrDino[i] = b.arrDino[i]; }
-//
-//	arrBird = new CBIRD[numOfBirds];
-//	for (i = 0; i < numOfBirds; ++i) { arrBird[i] = b.arrBird[i]; }
-//
-//	a_isRunning = b.a_isRunning;
-//	a_curLevel = b.a_curLevel;
-//}
-//
-//CGAME::~CGAME() {
-//	clearGame();
-//}
-//
-////CGAME CGAME::operator=(const CGAME& b) {}
-//
-//
-////void CGAME::drawGame() {}
-//
-//
-//CPEOPLE* CGAME::getPeople() { return Player; }
-//CVEHICLE* CGAME::getTruck() { return arrTruck; }
-//CVEHICLE* CGAME::getCar() { return arrCar; }
-//CANIMAL* CGAME::getDino() { return arrDino; }
-//CANIMAL* CGAME::getBird() { return arrBird; }
-//
-//int CGAME::getTruckNum() { return numOfTrucks; }
-//int CGAME::getCarNum() { return numOfCars; }
-//int CGAME::getDinoNum() { return numOfDinos; }
-//int CGAME::getBirdNum() { return numOfBirds; }
-//
-//bool CGAME::isRunning() { return a_isRunning; }
-//int CGAME::curLevel() { return a_curLevel; }
-//
-//
-//void CGAME::pauseGame() { a_isRunning = 0; }
-//void CGAME::resumeGame() { a_isRunning = 1; }
-////void CGAME::startGame() {}
-//
-//void CGAME::exitGame(thread* a) {
-//	a->join();
-//	a_isRunning = 0;
-//}
-//
-//// === Constructing === //
-//void CGAME::resetGame(int level) {
-//	clearGame();
-//	a_curLevel = level;
-//	a_isRunning = 1;
-//
-//	Player = new CPEOPLE((LEFT + RIGHT) / 2, BOTTOM);
-//}
-//
-//void CGAME::clearGame() {
-//	delete Player;
-//	delete[] arrTruck;
-//	delete[] arrCar;
-//	delete[] arrDino;
-//	delete[] arrBird;
-//}
-//
-//// === Constructing === //
-//bool CGAME::loadGame(const char* dir) {
-//	ifstream in(dir);
-//
-//	if (!in.is_open()) { return 0; }
-//
-//	string check;
-//	getline(in, check);
-//	if (check != CHECK) { 
-//		in.close(); 
-//		return 0; 
-//	}
-//
-//	in >> a_curLevel;
-//
-//
-//	return 1;
-//}
-//
-//// === Constructing === //
-//bool CGAME::saveGame(const char* dir) {
-//	ofstream out(dir);
-//
-//	if (!out.is_open()) { return 0; }
-//
-//	out << "CROOSING_ROAD_SAVEFILE\n";
-//	
-//	out << a_curLevel << ',';
-//		//<< Player->x << ',' << Player->y << ',';
-//
-//	int i;
-//	for (i = 0; i < numOfTrucks; ++i)
-//		//out << arrTruck[i].x << ',' << arrTruck[i].y << ',';
-//
-//	for (i = 0; i < numOfCars; ++i)
-//		//out << arrCar[i].x << ',' << arrCar[i].y << ',';
-//
-//	for (i = 0; i < numOfDinos; ++i)
-//		//out << arrDino[i].x << ',' << arrDino[i].y << ',';
-//
-//	for (i = 0; i < numOfBirds; ++i)
-//		//out << arrBird[i].x << ',' << arrBird[i].y << ',';
-//
-//	out.close();
-//	return 1;
-//}
-//
-//
-//void CGAME::updatePosPeople(char key) {
-//	if (key == 'w') {
-//		Player->Up(1);
-//	}
-//	else if (key == 's') {
-//		Player->Down(1);
-//	}
-//	else if (key == 'a') {
-//		Player->Left(1);
-//	}
-//	else if (key == 'd') {
-//		Player->Right(1);
-//	}
-//}
-//
-//void CGAME::updatePosVehicle() {
-//	int i = 0;
-//
-//	for (i = 0; i < numOfTrucks; ++i) {
-//		//arrTruck[i].Move();
-//	}
-//	for (i = 0; i < numOfTrucks; ++i) {
-//		//arrCar[i].Move();
-//	}
-//}
-//
-//void CGAME::updatePosAnimal() {
-//	int i = 0;
-//
-//	for (i = 0; i < numOfDinos; ++i) {
-//		//arrTruck[i].Move();
-//	}
-//	for (i = 0; i < numOfBirds; ++i) {
-//		//arrCar[i].Move();
-//	}
-//}
+	if (constantVar::isHard) { current[0] = "HARD"; }
+	else { current[0] = "EASY"; }
+
+	if (constantVar::isMute) { current[1] = "OFF"; }
+	else { current[1] = "ON "; }
+
+	const int y = 20;
+	const int x = 25;
+
+	int userPos = 0;
+	int flag = 0;
+	int color = rand() % 7 + 9;
+
+	map.printBorder();
+
+	bool newInput = true;
+	while (1) {
+		// always runs -> color flash
+		if (newInput) {
+			color = rand() % 7 + 9;
+			TextColor(color);
+			drawTitle();
+
+			for (int i = 0; i < 3; ++i) {
+				gotoXY(x, y + i);
+
+				if (i == userPos) { TextColor(11); }
+				else { TextColor(15); }
+
+				cout << setting[i] << "\t" << current[i];
+			}
+
+			newInput = false;
+		}
+		if (_kbhit()) {
+			newInput = true;
+
+			char key = _getch();
+			if (key == 'W' || key == 'w') {
+				userPos = (userPos + 2) % 3;
+			}
+			else if (key == 'S' || key == 's') {
+				userPos = (userPos + 1) % 3;
+			}
+			else if (key == 13) {
+				switch (userPos) {
+				case 0:
+					toggleHard();
+
+					if (constantVar::isHard) { current[0] = "HARD"; }
+					else { current[0] = "EASY"; }
+
+					if (!constantVar::isMute) {
+						//PlaySound(TEXT("RING.wav"), NULL, SND_ASYNC);
+						//PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+					}
+
+					break;
+				case 1:
+					toggleMute();
+
+					if (!constantVar::isMute) {
+						current[1] = "ON ";
+						//PlaySound(TEXT("RING.wav"), NULL, SND_ASYNC);
+						//PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+					}
+					else { current[1] = "OFF"; }
+
+					break;
+				case 2:
+					system("cls");
+					flag = 1;
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+					return;
+				}
+			}
+		}
+	}
+}
+
+void Game::menu() {
+	const char* choice[4] = { "New Game", "Load Game", "Settings", "Quit" };
+	const int x = 35, y = 20;
+
+	//if (!constantVar::isMute) { PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC); }
+
+	int curPos = 0;
+	bool newInput = true;
+	while (true) {
+		newInput = true;
+		map.printBorder();
+
+		//if (!constantVar::isMute) { PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC); }
+
+		while (true) {
+			if (newInput) {
+				for (int i = 0; i < 4; i++) {
+					gotoXY(x, y + i);
+
+					if (i == curPos) { TextColor(11); }
+					else { TextColor(15); }
+
+					cout << choice[i] << endl;
+				}
+
+				int color = rand() % 7 + 9;
+				TextColor(color);
+				
+				drawTitle();
+
+				TextColor(7);
+
+				newInput = false;
+			}
+			switch (inputKey()) {
+				newInput = true;
+				PlaySound(TEXT("RING.wav"), NULL, SND_ASYNC);
+			case 'w':
+			case 'W':
+				newInput = true;
+				curPos = (curPos + 3) % 4;
+				break;
+			case 's':
+			case 'S':
+				newInput = true;
+				curPos = (curPos + 1) % 4;
+				break;
+			case 13:
+				switch (curPos) {
+				case 0:
+					while (1) {
+						loading();
+
+						if (newGame()) {
+							Sleep(1000);
+
+							clrscr();
+							map.printBorder();
+
+							//if (!constantVar::isMute)PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+
+							newInput = true;
+
+							break;
+						}
+						else if (!crashedMenu()) {
+							if (isLoaded) {
+								map.~Map();
+								new(&map) Map;
+							}
+							Sleep(1000);
+
+							clrscr();
+							map.printBorder();
+
+							//if (!constantVar::isMute)PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+
+							newInput = true;
+							break;
+						}
+					}
+					break;
+				case 1:
+					Sleep(1000);
+					if (loadGameMenu()) {
+						while (1) {
+							loading();
+
+							if (newGame()) {
+								Sleep(1000);
+
+								clrscr();
+								map.printBorder();
+
+								if (!constantVar::isMute)PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+
+								newInput = true;
+								break;
+							}
+							else if (!crashedMenu()) {
+								Sleep(1000);
+								TextColor(7);
+
+								clrscr();
+								map.printBorder();
+
+								//if (!constantVar::isMute)PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+
+								newInput = true;
+								break;
+							}
+						}
+					}
+					else {
+						newInput = true;
+						map.printBorder();
+					}
+					break;
+				case 2:
+					Sleep(500);
+
+					gameSettings();
+					newInput = true;
+
+					map.printBorder();
+					break;
+				case 3:
+					clrscr();
+					return;
+				}
+				break;
+			}
+		}
+	}
+}
+
+bool Game::crashedMenu() {
+	clrscr();
+	map.printMap();
+	map.deleteOldPlayer();
+	
+	map.bombEffect();
+
+	gotoXY(15, 5); cout << "   _____ _____             _____ _    _ ______ _____  _ ";
+	gotoXY(15, 6); cout << "  / ____|  __ \\     /\\    / ____| |  | |  ____|  __ \\| |";
+	gotoXY(15, 7); cout << " | |    | |__) |   /  \\  | (___ | |__| | |__  | |  | | |";
+	gotoXY(15, 8); cout << " | |    |  _  /   / /\\ \\  \\___ \\|  __  |  __| | |  | | |";
+	gotoXY(15, 9); cout << " | |____| | \\ \\  / ____ \\ ____) | |  | | |____| |__| |_|";
+	gotoXY(15, 10); cout << "  \\_____|_|  \\_\\/_/    \\_\\_____/|_|  |_|______|_____/(_)";
+
+	const char* choice[2] = { "YES", "NO" };
+	int curPos = 0, x = 36, y = 27;
+
+	TextColor(7);
+	gotoXY(35, 25); cout << "Do you want to continue?" << endl;
+
+	while (1) {
+		for (int i = 0; i < 2; i++) {
+			if (i == curPos) {
+				TextColor(227);
+				gotoXY(x, y + i);
+				cout << choice[i];
+				TextColor(7);
+			}
+			else {
+				gotoXY(x, y + i);
+				cout << choice[i];
+			}
+		}
+
+		switch (inputKey()) {
+		case 'w':
+		case 'W':
+			curPos = (curPos + 1) % 2;
+			break;
+		case 's':
+		case 'S':
+			curPos = (curPos + 1) % 2;
+			break;
+		case 13:
+			return !curPos;
+		}
+	}
+}
+
+void Game::togglePauseGame() {
+	isPausing = !isPausing;
+}

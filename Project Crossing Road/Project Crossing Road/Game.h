@@ -57,7 +57,7 @@ public:
 
 	void menu();
 
-	bool continueMenu();
+	bool crashedMenu();
 };
 
 void SubThread(Game* cg, bool* IS_RUNNING, bool* isPausing, bool* exitFlag);
