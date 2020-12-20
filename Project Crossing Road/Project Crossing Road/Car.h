@@ -5,7 +5,7 @@
 
 
 class Car : public Obstacle {
-	char** a; //a[1][4]
+	char** a; //a[2][4]
 public:
 	Car();
 	Car(Position pos);

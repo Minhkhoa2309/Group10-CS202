@@ -49,7 +49,7 @@ public:
 
 	void gameOver();
 
-	void playGame(bool& is_finish);
+	// void playGame(bool& is_finish);
 
 	// void testThread();
 

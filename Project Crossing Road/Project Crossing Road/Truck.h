@@ -5,7 +5,7 @@
 using namespace std;
 
 class Truck : public Obstacle {
-	char** a; //a[1][4]
+	char** a; //a[2][4]
 public:
 	Truck();
 	Truck(Position pos);

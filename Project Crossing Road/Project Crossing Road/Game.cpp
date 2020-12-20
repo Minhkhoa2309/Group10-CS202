@@ -427,16 +427,157 @@ bool Game::continueGame() {
 	return operatingGame();
 }
 
-// void Game::menu(bool& isFinish) {}
 bool Game::loadGameMenu() {
-	return false;
-} // get file of cMap map
-void Game::saveGameMenu() {} //void saveGame(); // print file of cMap map
-// void Game::pauseMenu(int cmd) {}
-void Game::gameOver() {}
-void Game::playGame(bool& is_finish) {}
-// void Game::testThread() {}
-vector<string> Game::getAllFilename(const std::string& name) {
-	vector<string> x = {};
-	return x;
+	string filename;
+	clrscr();
+	vector <string> files = getAllFilename("data");
+	if (files.size() == 0) {
+		gotoXY(30, 15);
+		cout << "No saved file to load !!!";
+		Sleep(1000);
+		return false;
+	}
+	int curPos = 0;
+
+	clrscr();
+	map.printBorder();
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
+	gotoXY(15, 5); cout << "**      *******      ****     *******" << endl;
+	gotoXY(15, 6); cout << "**     **     **    **  **    **     *" << endl;
+	gotoXY(15, 7); cout << "**     **     **   ********   **      * **     ** ******** **    ** **    **" << endl;
+	gotoXY(15, 8); cout << "****** **     **  **********  **     *  ** * * ** **       ** *  ** **    **" << endl;
+	gotoXY(15, 9); cout << "******  *******  **        ** *******   **  *  ** *******  **  * ** **    **" << endl;
+	gotoXY(15, 10); cout << "                                        **     ** **       **   *** **    **" << endl;
+	gotoXY(15, 11); cout << "                                        **     ** ******** **    ** ********" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	gotoXY(30, 13); cout << "<Press ESC to escape...>";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+	gotoXY(30, 15);
+	cout << "Choose Filename to load: ";
+
+	for (int i = 0; i < (int)files.size(); ++i) {
+		if (i == curPos) {
+			gotoXY(26, 16 + i);
+			cout << ">> ";
+		}
+		gotoXY(30, 16 + i);
+		cout << files[i] << endl;
+	}
+	while (true) {
+		if (_kbhit())
+		{
+			char key = _getch();
+			if (key == 'w')
+			{
+				gotoXY(26, 16 + curPos);
+				cout << "    " << files[curPos];
+				curPos--;
+				curPos = (curPos + files.size()) % files.size();
+				gotoXY(26, 16 + curPos);
+				cout << ">>  " << files[curPos];
+			}
+			if (key == 's')
+			{
+				gotoXY(26, 16 + curPos);
+				cout << "    " << files[curPos];
+				curPos++;
+				curPos = (curPos + files.size()) % files.size();
+				gotoXY(26, 16 + curPos);
+				cout << ">>  " << files[curPos];
+			}
+			if (key == 13)
+			{
+				isLoaded = true;
+				map.loadGame(files[curPos]);
+				clrscr();
+				//map.redrawMap();
+				return true;
+			}
+			if (key == 27)
+			{
+				clrscr();
+				//map.redrawMap();
+				return false;
+			}
+		}
+		Sleep(200);
+	}
 }
+void Game::saveGameMenu() { // get file of cMap ma
+	string filename;
+	clrscr();
+	map.printBorder();
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+	gotoXY(15, 5); cout << "*******        **** **    ** ******* " << endl;
+	gotoXY(15, 6); cout << " **          **  **  **   ** ** " << endl;
+	gotoXY(15, 7); cout << "   **      ********   **  ** *******    **     ** ******** **    ** **    **  " << endl;
+	gotoXY(15, 8); cout << "     **   **     **    ** ** **         ** * * ** **       ** *  ** **    ** " << endl;
+	gotoXY(15, 9); cout << "******   *       **     **** *******    **  *  ** *******  **  * ** **    **  " << endl;
+	gotoXY(15, 10); cout << "                                        **     ** **       **   *** **    **   " << endl;
+	gotoXY(15, 11); cout << "                                        **     ** ******** **    ** ********  " << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	gotoXY(15, 20);
+	cout << "<Press ESC to escape>";
+	map.deleteOldPlayer();
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	gotoXY(15, 15);
+	cout << "Input file name to save: ";
+	//getline(cin, filename);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+	char key;
+	while ((key = _getch()) != 27) {
+		switch (key) {
+		case '\b':
+			if (filename.size() != 0) {
+				filename.pop_back();
+				gotoXY(50, 15);
+				cout << "                                                 ";
+				gotoXY(50, 15);
+				cout << filename;
+			}
+			break;
+		case 13:
+			map.saveGame(filename);
+			break;
+		default:
+			filename.push_back(key);
+			gotoXY(50, 15);
+			cout << filename;
+		}
+		if (key == 13) break;
+	}
+	clrscr();
+	map.redrawMap();
+}
+
+void Game::gameOver() {}
+
+vector<string> Game::getAllFilename(const std::string& name) {
+	vector<string> v;
+	
+	string pattern(name);
+	pattern.append("\\*");
+	
+	wstring stemp = wstring(pattern.begin(), pattern.end());
+	LPCWSTR sw = stemp.c_str();
+	WIN32_FIND_DATA data;
+	HANDLE hFind;
+	
+	if ((hFind = FindFirstFile(sw, &data)) != INVALID_HANDLE_VALUE) {
+		do {
+			wchar_t* txt = data.cFileName;
+			wstring ws(txt);
+			string str(ws.begin(), ws.end());
+			if (str[0] == '.') continue;
+			v.push_back(str);
+		} while (FindNextFile(hFind, &data) != 0);
+		FindClose(hFind);
+	}
+	return v;
+}
+
+// void Game::menu(bool& isFinish) {}
+// void Game::testThread() {}
+// void Game::pauseMenu(int cmd) {}
+// void saveGame(); // print file of cMap map
+// void Game::playGame(bool& is_finish) {}

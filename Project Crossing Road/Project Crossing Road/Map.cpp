@@ -335,6 +335,7 @@ void Map::bombEffect() {
 }
 void Map::saveGame(string file) {
 	ofstream outfile("./data/" + file + ".bin", ios::out | ios::binary);
+	
 	printInt(level.getLevel(), outfile);
 	printInt(player.getX(), outfile);
 	printInt(player.getY(), outfile);
@@ -394,7 +395,6 @@ bool Map::loadGame(string file) {
 			eY = readInt(infile);
 			eType = readInt(infile);
 			rowsData.pushEnemy(i, level.getNewObstacle(Position(eX, eY), eType));
-			//Print enemy ?
 		}
 	}
 	infile.close();
