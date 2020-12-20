@@ -16,6 +16,7 @@ public:
 	void sound();
 
 	int getWidth();
+	int getHeight();
 	int getType();
 
 	void test();

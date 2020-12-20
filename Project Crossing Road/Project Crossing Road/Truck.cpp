@@ -41,3 +41,6 @@ int Truck::getType() {
 int Truck::getWidth() {
 	return 4;
 }
+int Truck::getHeight() {
+	return 1;
+}

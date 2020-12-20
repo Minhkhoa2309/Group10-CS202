@@ -23,7 +23,7 @@ public:
 	int getX();
 	int getY();
 	virtual int getWidth();
-	int getHeight();
+	virtual int getHeight();
 	
 	void updatePosition(int dx, int dy);
 	bool isOutOfMap();

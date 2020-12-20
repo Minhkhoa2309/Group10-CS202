@@ -3,9 +3,9 @@
 void Map::printBorder() {
 	clrscr();
 	gotoXY(0, 0);
-	for (int i = 0; i < height; i++) {
-		cout << "    ";
-		for (int j = 0; j < width; j++)
+	for (int i = 0; i <= height + 1; i++) {
+		cout << "  ";
+		for (int j = 0; j <= width + 1; j++)
 			cout << map[i][j];
 		cout << endl;
 	}
@@ -65,14 +65,16 @@ void Map::printCongrats() {
 }
 
 Map::Map() : width(115), height(36) {
-	for (int i = 0; i <= width; ++i)
-		map[0][i] = map[height - 1][i] = '-';
+	for (int i = 0; i <= width; ++i) {
+		map[0][i] = '-';
+		map[height + 1][i] = '-';
+	}
 	map[0][width + 1] = map[height + 1][width + 1] = ' ';
-	
+
 	for (int i = 1; i <= height; ++i) {
 		map[i][0] = map[i][width] = '|';
 		map[i][width + 1] = ' ';
-		
+
 		for (int j = 1; j < width; ++j) {
 			map[i][j] = ' ';
 		}
@@ -85,7 +87,7 @@ void Map::resetMap() {
 
 	for (int i = 1; i <= height; ++i) {
 		map[i][0] = map[i][width + 1] = '|';
-		
+
 		for (int j = 1; j <= width; ++j) {
 			map[i][j] = ' ';
 		}
@@ -190,9 +192,9 @@ void Map::printMap() {
 		}
 		cout << endl;
 	}
-	
+
 	gotoXY(125, 1); cout << "<Crossing Road Game>";
-	
+
 	gotoXY(125, 3); cout << "LV. " << level.getLevel() << endl;
 	gotoXY(125, 5); cout << "CONTROLS:" << endl;
 	gotoXY(127, 6); cout << "[ W ]: UP" << endl;
@@ -209,7 +211,7 @@ void Map::printMap() {
 
 void Map::drawMap() {
 	vector <Obstacle*> obstacleList = rowsData.listObstacle();
-	
+
 	for (int i = 0; i < obstacleList.size(); ++i) {
 		if (player.crash(obstacleList[i]->getPos(), obstacleList[i]->getWidth() - 3, obstacleList[i]->getHeight())) {
 			if (!constantVar::isMute) { obstacleList[i]->sound(); }
@@ -257,7 +259,7 @@ void Map::deleteOldPlayer() {
 void Map::drawPlayer() {
 	int status = draw(player.getPos(), player.shape(), player.getWidth(), player.getHeight());
 	/*if (status == -1) {
-		player.killPlayer(); // cho nay nhin co ve la k dung 
+		player.killPlayer(); // cho nay nhin co ve la k dung
 	}*/
 }
 void Map::drawEnemies(Obstacle* obstacle) {
@@ -266,7 +268,7 @@ void Map::drawEnemies(Obstacle* obstacle) {
 		obstacle->goOutMap();
 	}
 	/*if (status == -1) {
-		player.killPlayer(); // cho nay nhin co ve la k dung 
+		player.killPlayer(); // cho nay nhin co ve la k dung
 	}*/
 }
 void Map::randomNextState() {
@@ -355,7 +357,7 @@ void Map::saveGame(string file) {
 	}
 	outfile.close();
 }
-bool Map::loadGame(string file) { 
+bool Map::loadGame(string file) {
 	ifstream infile("./data/" + file, ios::in | ios::binary);
 	if (!infile.is_open()) {
 		return false;

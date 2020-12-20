@@ -40,6 +40,7 @@ char** Bird::shape() { return a; };
 void Bird::sound() { PlaySound(TEXT("Bird.wav"), NULL, SND_SYNC); };
 
 int Bird::getWidth() { return 3; }
+int Bird::getHeight() { return 2; }
 int Bird::getType() { return 0; }
 
 

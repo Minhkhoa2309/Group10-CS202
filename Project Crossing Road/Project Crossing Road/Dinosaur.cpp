@@ -40,6 +40,7 @@ char** Dinosaur::shape() { return a; };
 void Dinosaur::sound() { PlaySound(TEXT("Dinosaur.wav"), NULL, SND_SYNC); };
 
 int Dinosaur::getWidth() { return 3; }
+int Dinosaur::getHeight() { return 2; }
 int Dinosaur::getType() { return 2; }
 
 

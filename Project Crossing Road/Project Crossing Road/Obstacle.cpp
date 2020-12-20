@@ -37,7 +37,7 @@ int Obstacle::getWidth() {
 }
 
 int Obstacle::getHeight() {
-	return 3;
+	return 2;
 }
 
 void Obstacle::updatePosition(int dx, int dy) {

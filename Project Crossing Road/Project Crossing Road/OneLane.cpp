@@ -89,8 +89,9 @@ void OneLane::deleteOldObstacle(Position pos, int w, int h) {
 bool OneLane::printNewObstacle(Position pos, char** shape, int w, int h) { 
 	int X = pos.getX();
 	int Y = pos.getY();
-	if (Y == LEFTMAP) return 0;
-	if (Y > RIGHTMAP) return 0;
+	
+	if (Y == LEFTMAP || Y > RIGHTMAP) return 0;
+
 	for (int i = 0; i < h; ++i) {
 		for (int j = max(1, Y); j <= min(RIGHTMAP, Y + w - 1); ++j) {
 			gotoXY(Y + j, X + i);

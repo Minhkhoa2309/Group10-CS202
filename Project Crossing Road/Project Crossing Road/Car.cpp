@@ -35,6 +35,9 @@ int Car::getType() {
 int Car::getWidth() {
 	return 4;
 }
+int Car::getHeight() {
+	return 1;
+}
 void Car::test() {
 	for (int i = 0; i < 1; i++)
 		for (int j = 0; j < 4; j++) {
