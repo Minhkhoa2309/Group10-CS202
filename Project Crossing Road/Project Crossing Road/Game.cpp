@@ -35,8 +35,9 @@ void Game::gameSettings() {
 
 				if (i == userPos) { TextColor(11); }
 				else { TextColor(15); }
-
-				cout << setting[i] << "\t" << current[i];
+				
+				cout << setting[i];
+				if (i != 2) { cout << "\t" << current[i]; }
 			}
 
 			newInput = false;
@@ -426,15 +427,15 @@ bool Game::continueGame() {
 	return operatingGame();
 }
 
-void Game::menu(bool& isFinish) {}
+// void Game::menu(bool& isFinish) {}
 bool Game::loadGameMenu() {
 	return false;
 } // get file of cMap map
 void Game::saveGameMenu() {} //void saveGame(); // print file of cMap map
-void Game::pauseMenu(int cmd) {}
+// void Game::pauseMenu(int cmd) {}
 void Game::gameOver() {}
 void Game::playGame(bool& is_finish) {}
-void Game::testThread() {}
+// void Game::testThread() {}
 vector<string> Game::getAllFilename(const std::string& name) {
 	vector<string> x = {};
 	return x;

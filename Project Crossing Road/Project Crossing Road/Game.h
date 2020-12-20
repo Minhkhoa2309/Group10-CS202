@@ -27,7 +27,7 @@ public:
 
 	void gameSettings();
 
-	void menu(bool& isFinish);
+	// void menu(bool& isFinish);
 
 	bool newGame(); // start a new game, initialize cMap map
 
@@ -39,7 +39,7 @@ public:
 
 	void saveGameMenu(); //void saveGame(); // print file of cMap map
 
-	void pauseMenu(int cmd);
+	// void pauseMenu(int cmd);
 
 	void togglePauseGame(); // toggle status of isPausing
 
@@ -51,7 +51,7 @@ public:
 
 	void playGame(bool& is_finish);
 
-	void testThread();
+	// void testThread();
 
 	void loading();
 
@@ -62,5 +62,5 @@ public:
 	bool crashedMenu();
 };
 
-void SubThread(Game* cg, bool* IS_RUNNING, bool* isPausing, bool* exitFlag);
+// void SubThread(Game* cg, bool* IS_RUNNING, bool* isPausing, bool* exitFlag);
 #endif // cGame
