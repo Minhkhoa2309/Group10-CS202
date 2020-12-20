@@ -1,39 +1,20 @@
-#include <iostream>
-#include "ConsoleWindow.h"
-#include "Obstacle.h"
-#include "Bird.h"
-#include "Dinosaur.h"
-#include "Player.h"
-#include "Position.h"
-using namespace std;
-
-bool constantVar::isMute = false;
-bool constantVar::isHard = true;
+#include "main.h"
 
 
-int main()
-{
-	Bird a;
-	a.test();
-	a.sound();
-	cout << endl;
+int main() {
+	srand(time(NULL));
+	//DisableMouse();
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r); //stores the console's current dimensions
 
-	Dinosaur b;
-	b.test();
-	b.sound();
-	cout << endl;
+	//MoveWindow(window_handle, x, y, width, height, redraw_window);
+	MoveWindow(console, r.left, r.top, 1280, 720, TRUE);
+	FixConsoleWindow();
+	Game game;
+	//game.getAllFilename("data");
+	game.menu();
 
-	Car c;
-	c.test();
-	c.sound();
-	cout << endl;
 
-	Truck d;
-	d.test();
-	d.sound();
-	cout << endl;
-	
-
-	
-	return 0;
+	//system("pause");
 }
