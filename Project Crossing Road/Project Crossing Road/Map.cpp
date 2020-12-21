@@ -297,21 +297,21 @@ void Map::initializeNewState() {
 	new(&player) Player();
 	rowsData.~Lanes();
 	new(&rowsData) Lanes();
-	int padding[10];
-	for (int i = 0; i < 10; ++i) {
-		padding[i] = 0;
+	int numOfLanes = level.getNLane();
+	for (int i = 0; i < numOfLanes; ++i) {
 		int speed = rand() % (level.getMinSpeed() - level.getMaxSpeed() + 1) + level.getMaxSpeed();
 		bool direction = rand() % 2;
 		bool redLight = rand() % 2;
-		rowsData.pushRow(new OneLane(speed, direction, redLight, (i * 3) + 1));
+		rowsData.pushRow(new OneLane(speed, direction, redLight, (i * 4) + 1));
 	}
 	Obstacle* newEnemy;
 	Position pos;
 	int tryCount = 10000;
+	int* padding = new int[numOfLanes] { 0 };
 	while (tryCount--) {
-		int rRow = (rand() % 9) + 1;
+		int rRow = (rand() % numOfLanes) + 1;
 		padding[rRow] += (rand() % 20) + 9;
-		pos = Position((rRow * 3) + 1, padding[rRow]);
+		pos = Position((rRow * 4) + 1, padding[rRow]);
 		newEnemy = level.randNewObstacle(pos);
 		if (!newEnemy) break;
 		if (!rowsData.pushEnemy(rRow, newEnemy)) {

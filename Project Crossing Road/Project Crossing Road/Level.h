@@ -26,6 +26,7 @@ public:
 	bool nextLevel();
 	int getMaxSpeed();
 	int getMinSpeed();
+	int getNLane();
 	Obstacle* randNewObstacle(Position pos);
 	Obstacle* getNewObstacle(Position pos, int type);
 	void decNObstacle(int d);

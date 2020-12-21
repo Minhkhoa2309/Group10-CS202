@@ -79,7 +79,7 @@ void OneLane::deleteOldObstacle(Position pos, int w, int h) {
 	int Y = pos.getY();
 	if (Y == LEFTMAP) return;
 	if (Y > RIGHTMAP) return;
-	for (int i = 0; i < h; ++i) {
+	for (int i = 2; i < h; ++i) {
 		for (int j = max(1, Y); j <= min(RIGHTMAP, Y + w - 1); ++j) {
 			gotoXY(Y + j, X + i);
 			cout << ' ';
@@ -92,7 +92,7 @@ bool OneLane::printNewObstacle(Position pos, char** shape, int w, int h) {
 	
 	if (Y == LEFTMAP || Y > RIGHTMAP) return 0;
 
-	for (int i = 0; i < h; ++i) {
+	for (int i = 2; i < h; ++i) {
 		for (int j = max(1, Y); j <= min(RIGHTMAP, Y + w - 1); ++j) {
 			gotoXY(Y + j, X + i);
 			cout << shape[i][j - max(1, Y)];
