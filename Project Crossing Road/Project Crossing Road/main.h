@@ -14,7 +14,7 @@
 using namespace std;
 
 
-bool constantVar::isMute = false;
+bool constantVar::isMute = true;
 bool constantVar::isHard = false;
 
 

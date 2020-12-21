@@ -33,8 +33,11 @@ using namespace std;
 #define key_Right	1077
 #define key_none	-1
 
-
 class constantVar {
+private:
+	constantVar() {};
+	constantVar(const constantVar&) {};
+	constantVar& operator=(const constantVar&) { return *this; };
 public:
 	static bool isMute;
 	static bool isHard;

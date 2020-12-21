@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player() {
-	pos.setPos(34, 28);
+	pos.setPos(35, 28);
 	drawPlayer();
 	isDead = false;
 }
@@ -54,6 +54,7 @@ bool Player::IsDead() {
 }
 
 bool Player::crash(Position pos, int w, int h) {
+	/*
 	if (w == 4) {
 		if (getX() == pos.getX()) {
 			if (pos.getY() <= getY() && getY() - pos.getY() <= 3)
@@ -70,6 +71,8 @@ bool Player::crash(Position pos, int w, int h) {
 				return true;
 		}
 	}
+	*/
+	return false;
 }
 
 void Player::Up() {

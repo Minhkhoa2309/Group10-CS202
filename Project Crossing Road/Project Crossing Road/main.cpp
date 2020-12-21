@@ -12,4 +12,9 @@ int main() {
 
 	Game game;
 	game.menu();
+
+	// traffic light is good now, top of lane
+	// todo:
+	//	object drawing
+	//	shift crash noti
 }

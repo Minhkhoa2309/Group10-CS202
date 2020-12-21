@@ -302,16 +302,16 @@ void Map::initializeNewState() {
 		int speed = rand() % (level.getMinSpeed() - level.getMaxSpeed() + 1) + level.getMaxSpeed();
 		bool direction = rand() % 2;
 		bool redLight = rand() % 2;
-		rowsData.pushRow(new OneLane(speed, direction, redLight, (i * 4) + 1));
+		rowsData.pushRow(new OneLane(speed, direction, redLight, (i * 4) + 5));
 	}
 	Obstacle* newEnemy;
 	Position pos;
 	int tryCount = 10000;
 	int* padding = new int[numOfLanes] { 0 };
 	while (tryCount--) {
-		int rRow = (rand() % numOfLanes) + 1;
-		padding[rRow] += (rand() % 20) + 9;
-		pos = Position((rRow * 4) + 1, padding[rRow]);
+		int rRow = (rand() % numOfLanes);
+		padding[rRow] += (rand() % 4) + 20;
+		pos = Position(rRow * 4 + 5, padding[rRow]);
 		newEnemy = level.randNewObstacle(pos);
 		if (!newEnemy) break;
 		if (!rowsData.pushEnemy(rRow, newEnemy)) {
