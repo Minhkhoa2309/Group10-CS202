@@ -54,41 +54,36 @@ bool Player::IsDead() {
 }
 
 bool Player::crash(Position pos, int w, int h) {
-	//if (w == 5) {
-	//	//crash while Car/Truck on the right
-	//	if (getX() == pos.getX()) {
-	//		if (getY() <= pos.getY() && max(getY(), pos.getY()) <= min(getY() + getWidth() - 3, pos.getY() + w - 3))
-	//			return true;
-	//		if (getY() >= pos.getY() && getY() - pos.getY() <= 3)
-	//			return true;
-	//	}
-	//}
-	//if (w == 3) {
-	//	if (getX() == pos.getX()) {
-	//		if (getY() >= pos.getY() && pos.getY() + w - 1 >= getY()) // crash while bird on the left
-	//			return true;
-	//		if (getY() <= pos.getY() && pos.getY() - getY() <= 2) //crash while bird on the right
-	//			return true;
-	//	}
-	//}
-	//else
-	//	if (getX() == pos.getX() && max(getY(), pos.getY()) <= min(getY() + getWidth() - 3, pos.getY() + w - 3)) 
-	//		return true;
-	return false;
+	if (w == 4) {
+		if (getX() == pos.getX()) {
+			if (pos.getY() <= getY() && getY() - pos.getY() <= 3)
+				return true;
+			if (pos.getY() >= getY() && pos.getY() - getY() <= 2)
+				return true;
+		}
+	}
+	if (w == 3) {
+		if (getX() == pos.getX()) {
+			if (pos.getY() <= getY() && getY() - pos.getY() <= 2)
+				return true;
+			if (pos.getY() >= getY() && pos.getY() - getY() <= 2)
+				return true;
+		}
+	}
 }
 
 void Player::Up() {
 	sound();
 	if (pos.getX() <= 3)
 		return;
-	pos.setPos(pos.getX() - 2, pos.getY());
+	pos.setPos(pos.getX() - 4, pos.getY());
 }
 
 void Player::Down() {
 	sound();
 	if (pos.getX() + 3 > 34)
 		return;
-	pos.setPos(pos.getX() + 2, pos.getY());
+	pos.setPos(pos.getX() + 4, pos.getY());
 }
 
 void Player::Left() {
