@@ -181,7 +181,6 @@ int Map::readInt(ifstream& infile) {
 }
 
 void Map::printMap() {
-
 	clrscr();
 
 	gotoXY(0, 0);
@@ -273,14 +272,18 @@ void Map::drawEnemies(Obstacle* obstacle) {
 }
 void Map::randomNextState() {
 	srand(time(NULL));
-	//int t = rand(); // this will be get from global clock
+
 	Obstacle* newEnemy;
 	Position pos;
+	int numOfLanes = level.getNLane();
+
 	int tryCount = 10000;
 	while (tryCount--) {
-		int rRow = (rand() % 9) + 1;
-		pos = Position((rRow * 3) + 1, 4);
+		int rRow = rand() % numOfLanes;
+
+		pos = Position((rRow * 4) + 5, 4);
 		newEnemy = level.randNewObstacle(pos);
+		
 		if (!newEnemy) break;
 		if (!rowsData.pushEnemy(rRow, newEnemy)) {
 			level.decNObstacle(1);
@@ -297,6 +300,7 @@ void Map::initializeNewState() {
 	new(&player) Player();
 	rowsData.~Lanes();
 	new(&rowsData) Lanes();
+
 	int numOfLanes = level.getNLane();
 	for (int i = 0; i < numOfLanes; ++i) {
 		int speed = rand() % (level.getMinSpeed() - level.getMaxSpeed() + 1) + level.getMaxSpeed();
@@ -304,13 +308,14 @@ void Map::initializeNewState() {
 		bool redLight = rand() % 2;
 		rowsData.pushRow(new OneLane(speed, direction, redLight, (i * 4) + 5));
 	}
+
 	Obstacle* newEnemy;
 	Position pos;
 	int tryCount = 10000;
 	int* padding = new int[numOfLanes] { 0 };
 	while (tryCount--) {
 		int rRow = (rand() % numOfLanes);
-		padding[rRow] += (rand() % 4) + 20;
+		padding[rRow] += (rand() % 4) + 7;
 		pos = Position(rRow * 4 + 5, padding[rRow]);
 		newEnemy = level.randNewObstacle(pos);
 		if (!newEnemy) break;
