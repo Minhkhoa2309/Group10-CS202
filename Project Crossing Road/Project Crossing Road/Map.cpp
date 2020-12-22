@@ -212,7 +212,7 @@ void Map::drawMap() {
 	vector <Obstacle*> obstacleList = rowsData.listObstacle();
 
 	for (int i = 0; i < obstacleList.size(); ++i) {
-		if (player.crash(obstacleList[i]->getPos(), obstacleList[i]->getWidth() - 3, obstacleList[i]->getHeight())) {
+		if (player.crash(obstacleList[i]->getPos(), obstacleList[i]->getWidth(), obstacleList[i]->getHeight())) {
 			if (!constantVar::isMute) { obstacleList[i]->sound(); }
 			player.gotHit();
 			deleteOldPlayer();
