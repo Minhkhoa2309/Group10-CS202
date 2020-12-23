@@ -1,5 +1,5 @@
 #include "OneLane.h"
-
+#include <Windows.h>
 OneLane::OneLane(int speed, bool direction, bool redLight, int currentRow) {
 	this->speed = speed;
 	this->direction = direction;
@@ -56,6 +56,7 @@ int OneLane::moveToNextState(int t) {
 		deleteOldObstacle(curObstacle->getPos(), curObstacle->getWidth(), curObstacle->getHeight());
 		curObstacle->updatePosition(0, dy);
 		// Print Enemy
+		Sleep(1);
 		bool canPrint = printNewObstacle(curObstacle->getPos(), curObstacle->shape(), curObstacle->getWidth(), curObstacle->getHeight());
 		if (!canPrint) {
 			curObstacle->goOutMap();

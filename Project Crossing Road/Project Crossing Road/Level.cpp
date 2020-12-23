@@ -16,7 +16,7 @@ Level::Level(int level, int nObstacle) {
 
 void Level::initialize() {
 	nLane = 7;
-	maxObstacle = nLane * 5;
+	maxObstacle = nLane * 7;
 	if (constantVar::isHard) {
 		maxSpeed = 5 - level * 2;
 		minSpeed = 5 - level * 1;
