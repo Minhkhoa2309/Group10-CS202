@@ -39,8 +39,6 @@ public:
 							   //    void handleKeyInput(); // receive key input from cGame and call appropriate function
 	void updatePosPlayer(char moving);
 
-	void bombEffect();
-
 	void saveGame(string file);
 	bool loadGame(string file);
 

@@ -24,44 +24,14 @@ void Map::printCongrats() {
 	gotoXY(23, 20); cout << "##           ##     ##    ###     ##      ########      ##     ##	 	    " << endl;
 	gotoXY(23, 21); cout << "##           ##     ##    ###     ##      #######       ##     ##     ##  ##" << endl;
 	gotoXY(50, 23); cout << "YOU HAVE WON THE GAME!" << endl;
-	//gotoXY(40, 25); cout << "Exit ?	" << endl;
 	const char* back = "<BACK TO MENU>";
 	while (inputKey() != 13) {
 		TextColor(7);
 		TextColor(227);
-		gotoXY(40, 23);
+		gotoXY(55, 24);
 		cout << back;
 		TextColor(7);
 	}
-	/*while (1) {
-		TextColor(7);
-		for (int i = 0; i < 2; i++) {
-			if (i == pos) {
-				TextColor(227);
-				gotoXY(x, y + i);
-				cout << choice[i];
-				TextColor(7);
-			}
-			else {
-				gotoXY(x, y + i);
-				cout << choice[i];
-			}
-		}
-
-		switch (inputKey()) {
-		case 'w':
-			pos--;
-			pos = abs(pos);
-			pos %= 2;
-			break;
-		case 's':
-			pos++;
-			pos %= 2;
-			break;
-		case 13:
-			return;
-		}
-	}*/
 }
 
 Map::Map() : width(115), height(36) {
@@ -221,7 +191,6 @@ void Map::drawMap() {
 			clrscr();
 			printMap();
 			deleteOldPlayer();
-			bombEffect();
 			return;
 		}
 	}
@@ -280,15 +249,15 @@ void Map::randomNextState() {
 	int tryCount = 10000;
 	while (tryCount--) {
 		int rRow = rand() % numOfLanes;
-
-		pos = Position((rRow * 4) + 5, 4);
+		
+		pos = Position((rRow * 4) + 5, 5);
 		newEnemy = level.randNewObstacle(pos);
 		
 		if (!newEnemy) break;
 		if (!rowsData.pushEnemy(rRow, newEnemy)) {
 			level.decNObstacle(1);
 			delete newEnemy;
-		};
+		}
 	}
 	++t;
 	int tmp = rowsData.moveToNextState(t);
@@ -314,15 +283,17 @@ void Map::initializeNewState() {
 	int tryCount = 10000;
 	int* padding = new int[numOfLanes] { 0 };
 	while (tryCount--) {
-		int rRow = (rand() % numOfLanes);
-		padding[rRow] += (rand() % 4) + 7;
-		pos = Position(rRow * 4 + 5, padding[rRow]);
+		int rRow = rand() % numOfLanes;
+		padding[rRow] += (rand() % 20) + 9;
+		
+		pos = Position((rRow * 4) + 5, padding[rRow]);
 		newEnemy = level.randNewObstacle(pos);
+		
 		if (!newEnemy) break;
 		if (!rowsData.pushEnemy(rRow, newEnemy)) {
 			level.decNObstacle(1);
 			delete newEnemy;
-		};
+		}
 	}
 	Sleep(200);
 	rowsData.moveToNextState(0);
@@ -335,9 +306,7 @@ void Map::updatePosPlayer(char moving) {
 	else if (moving == 's' || moving == 'S') player.Down();
 	else return;
 }
-void Map::bombEffect() {
-	cout << "man hinh luc bi thua " << endl;
-}
+
 void Map::saveGame(string file) {
 	ofstream outfile("./data/" + file + ".bin", ios::out | ios::binary);
 	
@@ -346,7 +315,8 @@ void Map::saveGame(string file) {
 	printInt(player.getY(), outfile);
 
 	vector <OneLane*> rows(rowsData.listLane());
-	for (int i = 0; i < 10; ++i) {
+	printInt(rows.size(), outfile);
+	for (int i = 0; i < rows.size(); ++i) {
 		printInt(rows[i]->getCurrentRow(), outfile);
 		printInt((int)rows[i]->getDirection(), outfile);
 		printInt(rows[i]->getSpeed(), outfile);
@@ -368,6 +338,7 @@ bool Map::loadGame(string file) {
 	if (!infile.is_open()) {
 		return false;
 	}
+	
 	int lv = readInt(infile);
 	level.~Level();
 	new(&level) Level(lv, 0);
@@ -382,7 +353,8 @@ bool Map::loadGame(string file) {
 	rowsData.~Lanes();
 	new(&rowsData) Lanes();
 
-	for (int i = 0; i < 10; ++i) {
+	int numOfLanes = readInt(infile);
+	for (int i = 0; i < numOfLanes; ++i) {
 		int currentRow, direction, speed, redLight;
 		currentRow = readInt(infile);
 		direction = readInt(infile);
