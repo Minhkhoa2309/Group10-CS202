@@ -16,50 +16,36 @@
 using namespace std;
 
 class Game {
-	bool isLoaded = false;
 	Map map;
+	bool isLoaded = false;
 	bool isPausing = false;
 public:
-
 	Game() = default;
-
 	~Game() = default;
 
+	void menu();
 	void gameSettings();
+	bool crashedMenu();
 
-	// void menu(bool& isFinish);
-
-	bool newGame(); // start a new game, initialize cMap map
-
-	bool continueGame();  //continue our game
-
-	bool loadGameMenu(); // get file of cMap map
-
+	bool newGame();
+	bool continueGame();
 	bool operatingGame();
-
-	void saveGameMenu(); //void saveGame(); // print file of cMap map
-
-	// void pauseMenu(int cmd);
-
-	void togglePauseGame(); // toggle status of isPausing
-
-	void toggleMute();
-
-	void toggleHard();
-
-	void gameOver();
-
-	// void playGame(bool& is_finish);
-
-	// void testThread();
-
 	void loading();
 
 	vector<string> getAllFilename(const std::string& name);
+	bool loadGameMenu();
+	bool saveGameMenu();
 
-	void menu();
 
-	bool crashedMenu();
+	void togglePauseGame();
+	void toggleMute();
+	void toggleHard();
+
+	// void menu(bool& isFinish);
+	// void pauseMenu(int cmd);
+	// void saveGame();
+	// void playGame(bool& is_finish);
+	// void testThread();
 };
 
 // void SubThread(Game* cg, bool* IS_RUNNING, bool* isPausing, bool* exitFlag);

@@ -25,9 +25,9 @@ public:
 	Player(Position pos); // set current position when load game
 	~Player();
 
-	Position getPos();
 	int getX();
 	int getY();
+	Position getPos();
 	int getWidth();
 	int getHeight();
 
@@ -42,7 +42,7 @@ public:
 	void Right();
 	void gotHit(); // set isDead
 	void sound();
-	void drawPlayer();
 
+	void drawPlayer();
 };
 #endif // Player

@@ -18,7 +18,7 @@ bool OneLane::pushObstacle(Obstacle* newObstacle) {
 	if (!direction) {
 		newObstacle->updatePosition(0, RIGHTMAP - newObstacle->getY());
 	}
-	if (newObstacle->getY() > RIGHTMAP || newObstacle->getY() <= 3 || (enemy.size() && abs(enemy.back()->getY() - newObstacle->getY()) <= 8)) {
+	if (newObstacle->getY() > RIGHTMAP || newObstacle->getY() <= 1 || (enemy.size() && abs(enemy.back()->getY() - newObstacle->getY()) <= 8)) {
 		return false;
 	}
 	enemy.push_back(newObstacle);
@@ -38,11 +38,11 @@ int OneLane::moveToNextState(int t) {
 	}
 	if (direction)
 	{
-		gotoXY(RIGHTMAP + 60, currentRow);
+		gotoXY(RIGHTMAP + 60, currentRow + 2);
 	}
 	else
 	{
-		gotoXY(LEFTMAP - 1, currentRow);
+		gotoXY(LEFTMAP - 1, currentRow + 2);
 	}
 	cout << (char)254;
 	TextColor(7);
@@ -56,7 +56,7 @@ int OneLane::moveToNextState(int t) {
 		deleteOldObstacle(curObstacle->getPos(), curObstacle->getWidth(), curObstacle->getHeight());
 		curObstacle->updatePosition(0, dy);
 		// Print Enemy
-		Sleep(1);
+		// Sleep(1)
 		bool canPrint = printNewObstacle(curObstacle->getPos(), curObstacle->shape(), curObstacle->getWidth(), curObstacle->getHeight());
 		if (!canPrint) {
 			curObstacle->goOutMap();

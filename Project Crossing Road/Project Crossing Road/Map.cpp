@@ -51,19 +51,6 @@ Map::Map() : width(115), height(36) {
 	}
 }
 
-void Map::resetMap() {
-	for (int i = 0; i <= width + 1; i++)
-		map[0][i] = map[height + 1][i] = '-';
-
-	for (int i = 1; i <= height; ++i) {
-		map[i][0] = map[i][width + 1] = '|';
-
-		for (int j = 1; j <= width; ++j) {
-			map[i][j] = ' ';
-		}
-	}
-}
-
 bool Map::printLevelUp() {
 	if (level.getLevel() == 5) {
 		printCongrats();
@@ -230,15 +217,7 @@ void Map::drawPlayer() {
 		player.killPlayer(); // cho nay nhin co ve la k dung
 	}*/
 }
-void Map::drawEnemies(Obstacle* obstacle) {
-	int status = draw(obstacle->getPos(), obstacle->shape(), obstacle->getWidth(), obstacle->getHeight());
-	if (status == 0) {
-		obstacle->goOutMap();
-	}
-	/*if (status == -1) {
-		player.killPlayer(); // cho nay nhin co ve la k dung
-	}*/
-}
+
 void Map::randomNextState() {
 	srand(time(NULL));
 
@@ -249,8 +228,9 @@ void Map::randomNextState() {
 	int tryCount = 10000;
 	while (tryCount--) {
 		int rRow = rand() % numOfLanes;
-		
+
 		pos = Position((rRow * 4) + 5, 5);
+		// pos = Position((rRow * 4) + 5, 2);
 		newEnemy = level.randNewObstacle(pos);
 		
 		if (!newEnemy) break;
@@ -276,6 +256,7 @@ void Map::initializeNewState() {
 		bool direction = rand() % 2;
 		bool redLight = rand() % 2;
 		rowsData.pushRow(new OneLane(speed, direction, redLight, (i * 4) + 5));
+		// rowsData.pushRow(new OneLane(speed, direction, 1, (i * 4) + 5));
 	}
 
 	Obstacle* newEnemy;
@@ -285,6 +266,7 @@ void Map::initializeNewState() {
 	while (tryCount--) {
 		int rRow = rand() % numOfLanes;
 		padding[rRow] += (rand() % 20) + 9;
+		// padding[rRow] += rand() % 10;
 		
 		pos = Position((rRow * 4) + 5, padding[rRow]);
 		newEnemy = level.randNewObstacle(pos);
@@ -307,9 +289,12 @@ void Map::updatePosPlayer(char moving) {
 	else return;
 }
 
-void Map::saveGame(string file) {
-	ofstream outfile("./data/" + file + ".bin", ios::out | ios::binary);
-	
+bool Map::saveGame(string file) {
+	ofstream outfile("./saved/" + file + ".bin", ios::out | ios::binary);
+	if (!outfile.is_open()) {
+		return false;
+	}
+
 	printInt(level.getLevel(), outfile);
 	printInt(player.getX(), outfile);
 	printInt(player.getY(), outfile);
@@ -332,9 +317,11 @@ void Map::saveGame(string file) {
 		}
 	}
 	outfile.close();
+
+	return true;
 }
 bool Map::loadGame(string file) {
-	ifstream infile("./data/" + file, ios::in | ios::binary);
+	ifstream infile("./saved/" + file, ios::in | ios::binary);
 	if (!infile.is_open()) {
 		return false;
 	}

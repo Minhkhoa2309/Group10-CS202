@@ -304,10 +304,13 @@ bool Game::newGame() {
 		map.~Map();
 		new(&map) Map();
 	}
+
 	isPausing = false;
 	map.printMap();
-	if (!isLoaded)
-		map.initializeNewState();
+	
+	if (!isLoaded) { map.initializeNewState(); }
+	else { map.redrawMap(); }
+	
 	isLoaded = false;
 	return operatingGame();
 }
@@ -317,8 +320,10 @@ bool Game::operatingGame(){
 	const string choice[3] = { "Save Game","Load Game","Quit" };
 	int pos = 0;
 	while (!map.isEnd()) {
-		if (!isPausing) 
+		if (!isPausing) {
+			// Sleep(3);
 			map.randomNextState();
+		}
 		int x = 125, y = 22;
 		if (isPausing) {
 			TextColor(15);
@@ -414,6 +419,7 @@ bool Game::operatingGame(){
 			else 
 				return true;
 		}
+		// Sleep(3);
 	}
 	return false;
 }
@@ -428,11 +434,11 @@ bool Game::continueGame() {
 bool Game::loadGameMenu() {
 	string filename;
 	clrscr();
-	vector <string> files = getAllFilename("data");
+	vector <string> files = getAllFilename("saved");
 	if (files.size() == 0) {
 		gotoXY(30, 15);
 		cout << "No saved file to load !!!";
-		Sleep(1000);
+		Sleep(700);
 		return false;
 	}
 	int curPos = 0;
@@ -488,20 +494,18 @@ bool Game::loadGameMenu() {
 				isLoaded = true;
 				map.loadGame(files[curPos]);
 				clrscr();
-				//map.redrawMap();
 				return true;
 			}
 			if (key == 27)
 			{
 				clrscr();
-				//map.redrawMap();
 				return false;
 			}
 		}
 		Sleep(200);
 	}
 }
-void Game::saveGameMenu() { // get file of cMap ma
+bool Game::saveGameMenu() { // get file of cMap ma
 	string filename;
 	clrscr();
 	map.printBorder();
@@ -548,9 +552,9 @@ void Game::saveGameMenu() { // get file of cMap ma
 	}
 	clrscr();
 	map.redrawMap();
-}
 
-void Game::gameOver() {}
+	return true;
+}
 
 vector<string> Game::getAllFilename(const std::string& name) {
 	vector<string> v;

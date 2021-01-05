@@ -20,16 +20,18 @@ private:
 public:
 	Level();
 	Level(int level, int nEnemy);
-	
-	int getLevel();
-	bool newLevel(int lv);
-	bool nextLevel();
-	int getMaxSpeed();
-	int getMinSpeed();
-	int getNLane();
+
 	Obstacle* randNewObstacle(Position pos);
 	Obstacle* getNewObstacle(Position pos, int type);
 	void decNObstacle(int d);
+	
+	bool newLevel(int lv);
+	bool nextLevel();
+
+	int getLevel();
+	int getMaxSpeed();
+	int getMinSpeed();
+	int getNLane();
 };
 
 #endif // cLevel
