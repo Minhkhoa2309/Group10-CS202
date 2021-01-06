@@ -15,7 +15,7 @@ void Map::printCongrats() {
 	clrscr();
 	printMap();
 	deleteOldPlayer();
-	//if (!constantVar::isMute)PlaySound(TEXT("CompleteStage.wav"), NULL, SND_ASYNC);
+	if (!constantVar::isMute)PlaySound(TEXT("CompleteSound.wav"), NULL, SND_ASYNC);
 	gotoXY(23, 15); cout << "########     ##     ###    ##     ##       #######      ##     ##     ##  ##" << endl;
 	gotoXY(23, 16); cout << "########     ##     ####   ##     ##      ########      ##     ##     ##  ##" << endl;
 	gotoXY(23, 17); cout << "##           ##     ## ##  ##     ##     ###            ##     ##     ##  ##" << endl;
@@ -117,7 +117,7 @@ bool Map::isEnd() {
 
 bool Map::isWin() {
 	if (player.getX() == 1) {
-		//if (!constantVar::isMute)PlaySound(TEXT("CompleteStage.wav"), NULL, SND_ASYNC);
+		if (!constantVar::isMute)PlaySound(TEXT("CompleteSound.wav"), NULL, SND_ASYNC);
 		return true;
 	}
 	return false;

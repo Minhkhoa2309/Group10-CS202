@@ -56,7 +56,7 @@ int OneLane::moveToNextState(int t) {
 		deleteOldObstacle(curObstacle->getPos(), curObstacle->getWidth(), curObstacle->getHeight());
 		curObstacle->updatePosition(0, dy);
 		// Print Enemy
-		// Sleep(1)
+		Sleep(10);
 		bool canPrint = printNewObstacle(curObstacle->getPos(), curObstacle->shape(), curObstacle->getWidth(), curObstacle->getHeight());
 		if (!canPrint) {
 			curObstacle->goOutMap();
@@ -75,6 +75,7 @@ int OneLane::moveToNextState(int t) {
 void OneLane::toggleRedLight() {
 	redLight = !redLight;
 }
+
 void OneLane::deleteOldObstacle(Position pos, int w, int h) {
 	int X = pos.getX();
 	int Y = pos.getY();

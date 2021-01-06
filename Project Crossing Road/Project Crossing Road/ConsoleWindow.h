@@ -71,6 +71,6 @@ void DisableMouse();
 
 
 void drawTitle();
-
+void XoaManHinh();
 
 #endif

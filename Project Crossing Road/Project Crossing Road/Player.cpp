@@ -106,8 +106,8 @@ void Player::gotHit() {
 }
 
 void Player::sound() {
-//	if (!constantVar::isMute && !isDead)
-//		PlaySound(TEXT("RING.wav"), NULL, SND_ASYNC);
+	if (!constantVar::isMute && !isDead)
+		PlaySound(TEXT("MovingSound.wav"), NULL, SND_ASYNC);
 }
 
 void Player::drawPlayer() {

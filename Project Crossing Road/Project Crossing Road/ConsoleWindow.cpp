@@ -152,3 +152,14 @@ void drawTitle() {
 	gotoXY(21, 13); cout << "/ /___/ _, _/ /_/ /___/ /__/ // // /|  / /_/ /    / _, _/ /_/ / ___ |/ /_/ / ";
 	gotoXY(21, 14); cout << "\\____/_/ |_|\\____//____/____/___/_/ |_/\\____/    /_/ |_|\\____/_/  |_/_____/  ";
 }
+
+
+void XoaManHinh()
+{
+	HANDLE hOut;
+	COORD Position;
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	Position.X = 0;
+	Position.Y = 0;
+	SetConsoleCursorPosition(hOut, Position);
+}
