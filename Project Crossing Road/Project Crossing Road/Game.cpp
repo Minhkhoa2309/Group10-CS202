@@ -583,9 +583,3 @@ vector<string> Game::getAllFilename(const std::string& name) {
 	}
 	return v;
 }
-
-// void Game::menu(bool& isFinish) {}
-// void Game::testThread() {}
-// void Game::pauseMenu(int cmd) {}
-// void saveGame(); // print file of cMap map
-// void Game::playGame(bool& is_finish) {}

@@ -228,7 +228,7 @@ void Map::randomNextState() {
 	while (tryCount--) {
 		int rRow = rand() % numOfLanes;
 
-		pos = Position((rRow * 4) + 5, 5);
+		pos = Position((rRow * 4) + 5, 3);
 		// pos = Position((rRow * 4) + 5, 2);
 		newEnemy = level.randNewObstacle(pos);
 		
@@ -253,9 +253,9 @@ void Map::initializeNewState() {
 	for (int i = 0; i < numOfLanes; ++i) {
 		int speed = rand() % (level.getMinSpeed() - level.getMaxSpeed() + 1) + level.getMaxSpeed();
 		bool direction = rand() % 2;
-		bool redLight = rand() % 2;
-		rowsData.pushRow(new OneLane(speed, direction, redLight, (i * 4) + 5));
-		// rowsData.pushRow(new OneLane(speed, direction, 1, (i * 4) + 5));
+		//bool redLight = rand() % 2;
+		//rowsData.pushRow(new OneLane(speed, direction, redLight, (i * 4) + 5));
+		rowsData.pushRow(new OneLane(speed, direction, 1, (i * 4) + 5));
 	}
 
 	Obstacle* newEnemy;
@@ -294,12 +294,14 @@ bool Map::saveGame(string file) {
 		return false;
 	}
 
+	printInt(constantVar::isHard, outfile);
+	printInt(constantVar::isMute, outfile);
 	printInt(level.getLevel(), outfile);
 	printInt(player.getX(), outfile);
 	printInt(player.getY(), outfile);
 
 	vector <OneLane*> rows(rowsData.listLane());
-	printInt(rows.size(), outfile);
+	printInt((int)rows.size(), outfile);
 	for (int i = 0; i < rows.size(); ++i) {
 		printInt(rows[i]->getCurrentRow(), outfile);
 		printInt((int)rows[i]->getDirection(), outfile);
@@ -325,6 +327,8 @@ bool Map::loadGame(string file) {
 		return false;
 	}
 	
+	constantVar::isHard = readInt(infile);
+	constantVar::isMute = readInt(infile);
 	int lv = readInt(infile);
 	level.~Level();
 	new(&level) Level(lv, 0);
