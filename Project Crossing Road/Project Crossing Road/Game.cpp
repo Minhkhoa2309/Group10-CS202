@@ -139,7 +139,7 @@ void Game::menu() {
 						loading();
 
 						if (newGame()) {
-							Sleep(1000);
+							//Sleep(1000);
 
 							clrscr();
 							map.printBorder();
@@ -323,7 +323,7 @@ bool Game::operatingGame(){
 	int pos = 0;
 	while (!map.isEnd()) {
 		if (!isPausing) {
-			// Sleep(3);
+			 //Sleep(3);
 			map.randomNextState();
 		}
 		int x = 125, y = 22;
@@ -412,16 +412,18 @@ bool Game::operatingGame(){
 			if (!constantVar::isMute)PlaySound(TEXT("CompleteSound.wav"), NULL, SND_ASYNC);
 			if (map.printLevelUp()) {
 				clrscr();
+				
 				map.nextLevel();
 				map.printMap();
 				map.deleteOldPlayer();
 				map.initializeNewState();
 				map.drawPlayer();
+				
 			}
 			else 
 				return true;
 		}
-		// Sleep(3);
+		//Sleep(3);
 	}
 	return false;
 }
