@@ -59,20 +59,22 @@ void Game::gameSettings() {
 					else { current[0] = "EASY"; }
 
 					if (!constantVar::isMute) {
-						//PlaySound(TEXT("RING.wav"), NULL, SND_ASYNC);
-						//PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+						PlaySound(TEXT("MovingSound.wav"), NULL, SND_ASYNC);
+						PlaySound(TEXT("mainTheme.wav"), NULL, SND_ASYNC);
 					}
 
 					break;
 				case 1:
 					toggleMute();
 
-					if (!constantVar::isMute) {
-						current[1] = "ON ";
-						//PlaySound(TEXT("RING.wav"), NULL, SND_ASYNC);
-						//PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+					if (constantVar::isMute) {
+						current[1] = "OFF";
+						if (constantVar::isMute) PlaySound(NULL("mainTheme.wav"), NULL, SND_ASYNC);
 					}
-					else { current[1] = "OFF"; }
+					else {
+						current[1] = "ON ";
+						PlaySound(TEXT("mainTheme.wav"), NULL, SND_ASYNC);
+					}
 
 					break;
 				case 2:
@@ -90,7 +92,7 @@ void Game::menu() {
 	const char* choice[4] = { "New Game", "Load Game", "Settings", "Quit" };
 	const int x = 35, y = 20;
 
-	//if (!constantVar::isMute) { PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC); }
+	if (!constantVar::isMute) { PlaySound(TEXT("mainTheme.wav"), NULL, SND_ASYNC); }
 
 	int curPos = 0;
 	bool newInput = true;
@@ -98,7 +100,7 @@ void Game::menu() {
 		newInput = true;
 		map.printBorder();
 
-		//if (!constantVar::isMute) { PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC); }
+		if (!constantVar::isMute) { PlaySound(TEXT("mainTheme.wav"), NULL, SND_ASYNC); }
 
 		while (true) {
 			if (newInput) {
@@ -119,7 +121,7 @@ void Game::menu() {
 			}
 			switch (inputKey()) {
 				newInput = true;
-				PlaySound(TEXT("RING.wav"), NULL, SND_ASYNC);
+				PlaySound(TEXT("MovingSound.wav"), NULL, SND_ASYNC);
 			case 'w':
 			case 'W':
 				newInput = true;
@@ -137,12 +139,12 @@ void Game::menu() {
 						loading();
 
 						if (newGame()) {
-							Sleep(1000);
+							//Sleep(1000);
 
 							clrscr();
 							map.printBorder();
 
-							//if (!constantVar::isMute)PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+							if (!constantVar::isMute) PlaySound(TEXT("mainTheme.wav"), NULL, SND_ASYNC);
 
 							newInput = true;
 
@@ -158,7 +160,7 @@ void Game::menu() {
 							clrscr();
 							map.printBorder();
 
-							//if (!constantVar::isMute)PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+							if (!constantVar::isMute) PlaySound(TEXT("mainTheme.wav"), NULL, SND_ASYNC);
 
 							newInput = true;
 							break;
@@ -177,7 +179,7 @@ void Game::menu() {
 								clrscr();
 								map.printBorder();
 
-								if (!constantVar::isMute)PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+							if (!constantVar::isMute) PlaySound(TEXT("mainTheme.wav"), NULL, SND_ASYNC);
 
 								newInput = true;
 								break;
@@ -189,7 +191,7 @@ void Game::menu() {
 								clrscr();
 								map.printBorder();
 
-								//if (!constantVar::isMute)PlaySound(TEXT("PUBG.wav"), NULL, SND_ASYNC);
+								if (!constantVar::isMute) PlaySound(TEXT("mainTheme.wav"), NULL, SND_ASYNC);
 
 								newInput = true;
 								break;
@@ -273,7 +275,7 @@ void Game::togglePauseGame() {
 }
 
 void Game::loading() {
-	//if (!constantVar::isMute)PlaySound(TEXT("RaceStart.wav"), NULL, SND_ASYNC);
+	if (!constantVar::isMute)PlaySound(TEXT("StartSound.wav"), NULL, SND_ASYNC);
 	map.printMap();
 	map.deleteOldPlayer();
 
@@ -321,7 +323,7 @@ bool Game::operatingGame(){
 	int pos = 0;
 	while (!map.isEnd()) {
 		if (!isPausing) {
-			// Sleep(3);
+			 //Sleep(3);
 			map.randomNextState();
 		}
 		int x = 125, y = 22;
@@ -407,19 +409,21 @@ bool Game::operatingGame(){
 			map.drawMap();
 		}
 		if (map.isWin()) {
-			//if (!constantVar::isMute)PlaySound(TEXT("CompleteStage.wav"), NULL, SND_ASYNC);
+			if (!constantVar::isMute)PlaySound(TEXT("CompleteSound.wav"), NULL, SND_ASYNC);
 			if (map.printLevelUp()) {
 				clrscr();
+				
 				map.nextLevel();
 				map.printMap();
 				map.deleteOldPlayer();
 				map.initializeNewState();
 				map.drawPlayer();
+				
 			}
 			else 
 				return true;
 		}
-		// Sleep(3);
+		//Sleep(3);
 	}
 	return false;
 }
