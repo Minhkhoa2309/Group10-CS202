@@ -210,7 +210,6 @@ void Map::deleteOldPlayer() {
 	draw(player.getPos(), player.emptyShape(), player.getWidth(), player.getHeight());
 }
 
-// ========== Temp ========== //
 void Map::drawPlayer() {
 	int status = draw(player.getPos(), player.shape(), player.getWidth(), player.getHeight());
 	/*if (status == -1) {

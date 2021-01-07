@@ -46,17 +46,19 @@ int OneLane::moveToNextState(int t) {
 	}
 	cout << (char)254;
 	TextColor(7);
-	if (redLight) return nDelete;
+	// if (redLight) return nDelete;
 	vector <Obstacle*> newObstacle;
 	newObstacle.reserve(100);
 	for (int i = 0; i < (int)enemy.size(); ++i) {
 		Obstacle* curObstacle = enemy[i];
-		int dy = -1;
-		if (direction) dy = 1;
-		deleteOldObstacle(curObstacle->getPos(), curObstacle->getWidth(), curObstacle->getHeight());
-		curObstacle->updatePosition(0, dy);
+		if (!redLight) {
+			int dy = -1;
+			if (direction) dy = 1;
+			deleteOldObstacle(curObstacle->getPos(), curObstacle->getWidth(), curObstacle->getHeight());
+			curObstacle->updatePosition(0, dy);
+		}
 		// Print Enemy
-		// Sleep(1)
+		Sleep(1);
 		bool canPrint = printNewObstacle(curObstacle->getPos(), curObstacle->shape(), curObstacle->getWidth(), curObstacle->getHeight());
 		if (!canPrint) {
 			curObstacle->goOutMap();
