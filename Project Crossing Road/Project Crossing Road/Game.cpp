@@ -323,7 +323,6 @@ bool Game::operatingGame(){
 	int pos = 0;
 	while (!map.isEnd()) {
 		if (!isPausing) {
-			 //Sleep(3);
 			map.randomNextState();
 		}
 		int x = 125, y = 22;
@@ -355,8 +354,8 @@ bool Game::operatingGame(){
 			}
 			if (key == 'p') {
 				togglePauseGame();
-				pos = 0; // reset pause menu selection
-				if (!isPausing) { // map.redrawMap();
+				pos = 0; 
+				if (!isPausing) { 
 					gotoXY(125, 19); 
 					cout << "                  " << endl;
 					for (int i = 0; i < 3; i++) {
@@ -423,7 +422,6 @@ bool Game::operatingGame(){
 			else 
 				return true;
 		}
-		//Sleep(3);
 	}
 	return false;
 }

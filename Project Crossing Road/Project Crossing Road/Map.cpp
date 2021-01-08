@@ -69,15 +69,6 @@ bool Map::printLevelUp() {
 		const char* choice[2] = { "<YES>", "<NO>" };
 		int pos = 0, x = 36, y = 22;
 		TextColor(7);
-		/*TextColor(227);
-		gotoXY(x, y);
-		cout << choice[0];
-		TextColor(7);
-
-		TextColor(227);
-		gotoXY(x+10, y);
-		cout << choice[1];
-		TextColor(7);*/
 
 		while (1) {
 			TextColor(7);

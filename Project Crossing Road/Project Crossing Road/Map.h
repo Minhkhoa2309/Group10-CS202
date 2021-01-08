@@ -15,7 +15,6 @@ using namespace std;
 
 
 class Map {
-	//old figure: width=height =300
 	const int width = 115, height = 36;
 	char map[40][125];
 	Player player;
@@ -34,7 +33,7 @@ public:
 
 	int draw(Position pos, char** shape, int w, int h); // draw from position pos(x, y) shape(w, h) | 1: ok, 0: go out of map
 
-	void drawPlayer(); // draw player to map, check if crash => kill player
+	void drawPlayer();
 	void deleteOldPlayer();
 
 	void initializeNewState(); // intialize a new map base on level, reset player state
