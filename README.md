@@ -25,7 +25,3 @@ Phạm Thiên Long
 + Console xử lí console, di chuyển trỏ chuột tới vị trí x-y nhất định  
 + Position là tọa độ trên console      
 
-
-Hiếu: newGame(), continueGame(), loading(), toggleMute(), toggleHard()  
-Long: getAllFilename(), loadGameMenu(), saveGameMenu(), gameOver()  
-Duy: gameSetting(), menu(), continueMenu(), togglePauseGame()  
